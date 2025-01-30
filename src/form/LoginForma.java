@@ -121,7 +121,7 @@ public class LoginForma extends javax.swing.JFrame {
         }
         else{
            JOptionPane.showMessageDialog(this, "Uspesno ste se prijavili");
-           KlijentskaForma kf=new KlijentskaForma(r);
+           KlijentskaForma kf=new KlijentskaForma();
            kf.setVisible(true);
            this.dispose();
         }
