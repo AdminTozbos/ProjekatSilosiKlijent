@@ -81,6 +81,11 @@ public class KlijentskaForma extends javax.swing.JFrame {
         jMenu4.setText("Sifarnici");
 
         jMenuItem6.setText("Poljoprivredna kultura");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem6);
 
         jMenuItem7.setText("Radno iskustvo");
@@ -124,6 +129,11 @@ public class KlijentskaForma extends javax.swing.JFrame {
         IskustvoForma is=new IskustvoForma();
         is.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        KulturaForma kf=new KulturaForma();
+        kf.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
