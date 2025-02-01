@@ -4,6 +4,8 @@
  */
 package form;
 
+import model.PoljoprivrednoGazdinstvo;
+
 
 
 /**
@@ -68,12 +70,27 @@ public class KlijentskaForma extends javax.swing.JFrame {
         jMenu3.setText("Primalac usluge");
 
         jMenuItem3.setText("Kooperant");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
 
         jMenuItem4.setText("Poljoprivredno gazdinstvo");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
 
         jMenuItem5.setText("Poljoprivredno preduzece");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem5);
 
         jMenuBar1.add(jMenu3);
@@ -134,6 +151,21 @@ public class KlijentskaForma extends javax.swing.JFrame {
         KulturaForma kf=new KulturaForma();
         kf.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        KooperantForma kf=new KooperantForma();
+        kf.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       GazdinstvoForma gf=new GazdinstvoForma();
+       gf.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        PreduzeceForma pf=new PreduzeceForma();
+        pf.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
