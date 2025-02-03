@@ -36,6 +36,7 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
     List<PoljoprivrednoPreduzece>preduzeca;
     List<PoljoprivrednaKultura>kulture;
     List<String>nazivi;
+    Potvrda izabrana;
     /**
      * Creates new form UnosPromene
      */
@@ -50,6 +51,21 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         kn.start();
         stavke=new ArrayList<>();
         nazivi=new ArrayList<>();
+        
+        
+    }
+    public KreirajPotvrduForm(Potvrda potvrda) {
+        initComponents();
+        popuniComboRukovodilac();
+        popuniComboKooperant();
+        popuniComboKultura();
+        PoljeCena.setEnabled(false);
+        PoljeIznos.setEnabled(false);
+        KreirajPotvrduNit kn=new KreirajPotvrduNit(jComboBox2, kulture, PoljeCena, PoljeIznos, PoljeKolicina);
+        kn.start();
+        stavke=new ArrayList<>();
+        nazivi=new ArrayList<>();
+        izabrana=potvrda;
         
         
     }
@@ -382,6 +398,9 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         ServerskiOdgovor so=Komunikacija.getInstance().primiOdgovor();
         List<Potvrda>potvrde=(List<Potvrda>) so.getOdgovor();
         if(potvrde.isEmpty())p.setIdPotvrda(1);
+        else if(izabrana!=null){
+            p.setIdPotvrda(izabrana.getIdPotvrda());
+        }
         else{
             int temp=Integer.MIN_VALUE;
             for (Potvrda potvrda : potvrde) {
@@ -397,6 +416,10 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
             System.out.println(stavkaPotvrde.getIdPotvrda());
             stavkaPotvrde.setRb(pom+1);
             pom++;
+        }
+        if(izabrana!=null){
+            izmeniPotvrda(p);
+            return;
         }
         KreirajPotvrda(p);
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -530,5 +553,30 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
             }
         }
         
+    }
+
+    private void izmeniPotvrda(Potvrda p) {
+       KlijentskiZahtev kz2=new KlijentskiZahtev(Operacije.IZMENIPOT, p);
+        Komunikacija.getInstance().posaljiZahtev(kz2);
+        ServerskiOdgovor so2=Komunikacija.getInstance().primiOdgovor();
+        boolean uspeh= (boolean) so2.getOdgovor();
+        if(uspeh){
+            JOptionPane.showMessageDialog(this, "Sistem je zapamtio potvrdu");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Sistem nije uspeo da zapamti potvrdu","Greska",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+      for (StavkaPotvrde stavkaPotvrde : stavke) {
+            KlijentskiZahtev kz3=new KlijentskiZahtev(Operacije.DODAJSTA, stavkaPotvrde);
+            Komunikacija.getInstance().posaljiZahtev(kz3);
+            ServerskiOdgovor so3=Komunikacija.getInstance().primiOdgovor();
+            boolean uspeh1= (boolean) so3.getOdgovor();
+            if(!uspeh1){
+            
+            JOptionPane.showMessageDialog(this, "Sistem nije uspeo da zapamti potvrdu","Greska",JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+        }
     }
 }

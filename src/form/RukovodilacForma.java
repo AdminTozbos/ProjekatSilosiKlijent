@@ -295,6 +295,10 @@ public class RukovodilacForma extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private boolean proveriRukovodioca(RukovodilacKooperacije rk) {
+        if(!rk.getIme().matches("[A-Za-z]+"))return false;
+        if(!rk.getPrezime().matches("[A-Za-z]+"))return false;
+        if(!rk.getBrojTelefona().matches("(06)[0-90]+"))return false;
+        
         return true;
     }
     public void vratiListuRukovodilacKooperacije(Object kriterijumRukovodilacKooperacije,List<RukovodilacKooperacije>ruk){

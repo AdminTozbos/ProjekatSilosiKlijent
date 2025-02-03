@@ -318,7 +318,13 @@ public class GazdinstvoForma extends javax.swing.JFrame {
     }
 
     private boolean proveriGazdinstvo(PoljoprivrednoGazdinstvo pg) {
+        if(!pg.getMesto().matches("[A-Za-z]+"))return false;
+        if(!pg.getNazivKooperanta().matches("[A-Za-z]+"))return false;
+        if(!pg.getBrojTelefona().matches("(06)[0-90]+"))return false;
+        if(pg.getBrojTelefona().length()>12||pg.getBrojTelefona().length()<8)return false;
         return true;
+
+        
     }
 
     private boolean promeniPoljoprivrednoGazdinstvo(PoljoprivrednoGazdinstvo pg) {

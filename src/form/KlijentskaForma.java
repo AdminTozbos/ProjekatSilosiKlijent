@@ -51,6 +51,11 @@ public class KlijentskaForma extends javax.swing.JFrame {
         jMenu1.setText("Dokumenti");
 
         jMenuItem1.setText("Potvrda");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -166,6 +171,11 @@ public class KlijentskaForma extends javax.swing.JFrame {
         PreduzeceForma pf=new PreduzeceForma();
         pf.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        PotvrdaGlavnaForma pgf=new PotvrdaGlavnaForma();
+        pgf.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments

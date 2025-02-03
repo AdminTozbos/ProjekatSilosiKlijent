@@ -234,7 +234,7 @@ public class KulturaForma extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
-            JOptionPane.showMessageDialog(this, "Morate izabrati rukovodioca", "Greska", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Morate izabrati kulturu", "Greska", JOptionPane.WARNING_MESSAGE);
             return;
         }
         PoljoprivrednaKultura pk=pom.get(izabrani);
@@ -330,6 +330,15 @@ public class KulturaForma extends javax.swing.JFrame {
     }
 
     private boolean proveriKulturu(PoljoprivrednaKultura pk) {
+        boolean ok=true;
+        try {
+            Double cena=Double.parseDouble(jTextField2.getText());
+            Mesec mesec=Mesec.valueOf(jTextField3.getText());
+        } catch (Exception e) {
+            return false;
+        }
+       
+        if(!pk.getNazivKulture().matches("[a-z,A-Z]+"))return false;
         return true;
     }
 

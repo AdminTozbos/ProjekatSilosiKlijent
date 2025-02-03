@@ -18,7 +18,7 @@ public class ModelTabelaPotvrda extends AbstractTableModel{
     List<PoljoprivrednoGazdinstvo>gazdinstva;
     List<PoljoprivrednoPreduzece>preduzeca;
     
-    String []kolone={"rukovodilac","kooperant","datum izdavanja","datum vazenja","iznos"};
+    String []kolone={"kooperant","rukovodilac","datum izdavanja","datum vazenja","iznos"};
     public List<Potvrda> getPotvrde() {
         return potvrde;
     }

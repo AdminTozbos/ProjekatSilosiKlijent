@@ -12,6 +12,7 @@ import model.KlijentskiZahtev;
 import model.ModelTabelePreduzeca;
 import model.Operacije;
 import model.PoljoprivrednoPreduzece;
+import model.Potvrda;
 import model.ServerskiOdgovor;
 import niti.PreduzeceNit;
 
@@ -330,7 +331,14 @@ public class PreduzeceForma extends javax.swing.JFrame {
     }
 
     private boolean proveriPreduzece(PoljoprivrednoPreduzece pp) {
+        if(!pp.getMesto().matches("[A-Za-z]+"))return false;
+        if(!pp.getNazivKooperanta().matches("[A-Za-z]+"))return false;
+        if(!pp.getPravniZastupnik().matches("[A-Za-z]+"))return false;
+        if(pp.getPib().length()!=13)return false;
+        if(!pp.getPib().matches("[0-9]*"))return false;
+        if(!pp.getEmail().matches("[A-Za-z0-9]+@[A-Za-z0-9]+.[A-Za-z]"))return false;
         return true;
+            
     }
 
     private boolean promeniPoljoprivrednoPreduzece(PoljoprivrednoPreduzece pp) {
