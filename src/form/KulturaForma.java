@@ -6,7 +6,13 @@ package form;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import komunikacija.Komunikacija;
 import model.KlijentskiZahtev;
 import model.Mesec;
@@ -32,7 +38,7 @@ public class KulturaForma extends javax.swing.JFrame {
         this.kulture = kulture;
         this.pom=kulture;
     }
-    
+
     /**
      * Creates new form KulturaForma
      */
@@ -40,6 +46,59 @@ public class KulturaForma extends javax.swing.JFrame {
         initComponents();
         KulturaNit kn=new KulturaNit(jTable1,this);
         kn.start();
+        ListSelectionModel selectionModel = jTable1.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        try {
+            selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                //if (!e.getValueIsAdjusting()) {
+                    int izabrani = jTable1.getSelectedRow();
+                    if (izabrani != -1) {
+                       PoljoprivrednaKultura kultura=pom.get(izabrani);
+                       jTextField1.setText(kultura.getNazivKulture());
+                       jTextField2.setText(String.valueOf(kultura.getCena()));
+                       jTextField3.setText(String.valueOf(kultura.getMesecZetve()));
+                       kultura=pom.get(izabrani);
+
+                    
+                    }
+                
+                
+                //}
+            }
+        });
+        } catch (Exception e) {
+        }
+
+        
+        
+        
+
+    }
+
+    public JTextField getjTextField1() {
+        return jTextField1;
+    }
+
+    public void setjTextField1(JTextField jTextField1) {
+        this.jTextField1 = jTextField1;
+    }
+
+    public JTextField getjTextField2() {
+        return jTextField2;
+    }
+
+    public void setjTextField2(JTextField jTextField2) {
+        this.jTextField2 = jTextField2;
+    }
+
+    public JTextField getjTextField3() {
+        return jTextField3;
+    }
+
+    public void setjTextField3(JTextField jTextField3) {
+        this.jTextField3 = jTextField3;
     }
 
     /**
@@ -159,12 +218,12 @@ public class KulturaForma extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
                         .addGap(31, 31, 31)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
@@ -176,7 +235,7 @@ public class KulturaForma extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton5))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -338,7 +397,7 @@ public class KulturaForma extends javax.swing.JFrame {
             return false;
         }
        
-        if(!pk.getNazivKulture().matches("[a-z,A-Z]+"))return false;
+        if(!pk.getNazivKulture().matches("[a-zA-Z ]+"))return false;
         return true;
     }
 
@@ -386,7 +445,8 @@ public class KulturaForma extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sistem nije pronasao vrednosti po zadatom kriterijumu");
             return;
         }
-                    ModelTabelaKultura mtr=new ModelTabelaKultura(pom);
+        this.pom=pom;
+        ModelTabelaKultura mtr=new ModelTabelaKultura(pom);
         jTable1.setModel(mtr);
     }
 }

@@ -7,6 +7,9 @@ package form;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import komunikacija.Komunikacija;
 import model.KlijentskiZahtev;
 import model.ModelTabeleGazdinstvo;
@@ -43,6 +46,29 @@ public class GazdinstvoForma extends javax.swing.JFrame {
         initComponents();
         GazdinstvoNit gn=new GazdinstvoNit(jTable1,this);
         gn.start();
+        ListSelectionModel selectionModel = jTable1.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        try {
+            selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int izabrani = jTable1.getSelectedRow();
+                    if (izabrani != -1) {
+                       PoljoprivrednoGazdinstvo rk=pom.get(izabrani);
+                       jTextField1.setText(rk.getNazivKooperanta());
+                       jTextField2.setText(rk.getMesto());
+                       jTextField3.setText(rk.getVlasnikGaz());
+                       jTextField4.setText(String.valueOf(rk.getBrojTelefona()));
+                    
+                    }
+                
+                
+                }
+            }
+        });
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -318,8 +344,8 @@ public class GazdinstvoForma extends javax.swing.JFrame {
     }
 
     private boolean proveriGazdinstvo(PoljoprivrednoGazdinstvo pg) {
-        if(!pg.getMesto().matches("[A-Za-z]+"))return false;
-        if(!pg.getNazivKooperanta().matches("[A-Za-z]+"))return false;
+        if(!pg.getMesto().matches("[A-Za-z ]+"))return false;
+        if(!pg.getNazivKooperanta().matches("[A-Za-z ]+"))return false;
         if(!pg.getBrojTelefona().matches("(06)[0-90]+"))return false;
         if(pg.getBrojTelefona().length()>12||pg.getBrojTelefona().length()<8)return false;
         return true;
@@ -370,6 +396,7 @@ public class GazdinstvoForma extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sistem nije pronasao vrednosti po zadatom kriterijumu");
             return;
         }
+        this.pom=pom;
         ModelTabeleGazdinstvo mtr=new ModelTabeleGazdinstvo(pom);
         jTable1.setModel(mtr);
     }

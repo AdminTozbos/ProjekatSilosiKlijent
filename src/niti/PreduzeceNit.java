@@ -62,6 +62,6 @@ public class PreduzeceNit extends Thread{
             JOptionPane.showMessageDialog(pf, "Doslo je do greske prilikom vracanja");
             return;
         }
-        
+        pf.setPreduzeca(preduzeca);
     }
 }

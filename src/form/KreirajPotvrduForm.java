@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
 import model.KlijentskiZahtev;
+import model.Kooperant;
 import model.ModelTabeleStavka;
 import model.Operacije;
 import model.PoljoprivrednaKultura;
@@ -51,6 +52,8 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         kn.start();
         stavke=new ArrayList<>();
         nazivi=new ArrayList<>();
+        ModelTabeleStavka mts=new ModelTabeleStavka(stavke,nazivi);
+        jTable1.setModel(mts);
         
         
     }
@@ -66,6 +69,7 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         stavke=new ArrayList<>();
         nazivi=new ArrayList<>();
         izabrana=potvrda;
+        popuniPotvrdu(izabrana);
         
         
     }
@@ -578,5 +582,67 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
             return;
             }
         }
+    }
+
+    private void popuniPotvrdu(Potvrda izabrana) {
+        SimpleDateFormat smp=new SimpleDateFormat("dd.MM.yyyy");
+        jTextField1.setText(smp.format(izabrana.getDatumVazenja()));
+        KlijentskiZahtev kz=new KlijentskiZahtev(Operacije.VRATISTA, izabrana);
+        Komunikacija.getInstance().posaljiZahtev(kz);
+        ServerskiOdgovor so=Komunikacija.getInstance().primiOdgovor();
+        stavke=(List<StavkaPotvrde>) so.getOdgovor();
+        for (StavkaPotvrde stavkaPotvrde : stavke) {
+            for (PoljoprivrednaKultura poljoprivrednaKultura : kulture) {
+                if(poljoprivrednaKultura.getIdKultura()==stavkaPotvrde.getIdKultura()){
+                    nazivi.add(poljoprivrednaKultura.getNazivKulture());
+                }
+            }
+        }
+        ModelTabeleStavka mts=new ModelTabeleStavka(stavke, nazivi);
+        jTable1.setModel(mts);
+        RukovodilacKooperacije ruk=vratiRukovodioca(izabrana);
+        String test=ruk.getIme()+" "+ruk.getPrezime();
+        for (int i = 0; i < jComboBox1.getItemCount(); i++) {
+            String item = jComboBox1.getItemAt(i);
+            if(test.equals(item)){
+            jComboBox1.setSelectedIndex(i);
+                break;
+            }
+            
+        }
+        Kooperant koop=vratiKooperanta(izabrana);
+        String test2=koop.getNazivKooperanta();
+        
+        for (int i = 0; i < jComboBox3.getItemCount(); i++) {
+            String item = jComboBox3.getItemAt(i);
+            
+            if(test2.equals(item)){
+            jComboBox3.setSelectedIndex(i);
+                return;
+            }
+            
+        }
+    }
+
+    private RukovodilacKooperacije vratiRukovodioca(Potvrda izabrana) {
+        for (RukovodilacKooperacije rukovodilacKooperacije : rukovodioci) {
+            if(rukovodilacKooperacije.getId()==izabrana.getIdRukovodilac())return rukovodilacKooperacije;
+        }
+        return null;
+    }
+
+    private Kooperant vratiKooperanta(Potvrda izabrana) {
+        
+        if(izabrana.getKoopFlag()==0){
+            for (PoljoprivrednoPreduzece poljoprivrednoPreduzece : preduzeca) {
+                if(poljoprivrednoPreduzece.getIdKooperant()==izabrana.getIdKooperant())return poljoprivrednoPreduzece;
+            }
+        }
+        else{
+            for (PoljoprivrednoGazdinstvo poljoprivrednoGazdinstvo : gazdinstva) {
+                if(poljoprivrednoGazdinstvo.getIdKooperant()==izabrana.getIdKooperant())return poljoprivrednoGazdinstvo;
+            }
+        }
+        return null;
     }
 }

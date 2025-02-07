@@ -7,10 +7,14 @@ package form;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import komunikacija.Komunikacija;
 import model.KlijentskiZahtev;
 import model.ModelTabeleRukovodilac;
 import model.Operacije;
+import model.PoljoprivrednaKultura;
 import model.RukovodilacKooperacije;
 import model.ServerskiOdgovor;
 import niti.RukovodilacNit;
@@ -40,6 +44,28 @@ public class RukovodilacForma extends javax.swing.JFrame {
         initComponents();
         RukovodilacNit rn=new RukovodilacNit(jTable1,this);
         rn.start();
+        ListSelectionModel selectionModel = jTable1.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        try {
+            selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int izabrani = jTable1.getSelectedRow();
+                    if (izabrani != -1) {
+                       RukovodilacKooperacije rk=pom.get(izabrani);
+                       jTextField1.setText(rk.getIme());
+                       jTextField2.setText(String.valueOf(rk.getPrezime()));
+                       jTextField3.setText(String.valueOf(rk.getBrojTelefona()));
+                    
+                    }
+                
+                
+                }
+            }
+        });
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -234,6 +260,7 @@ public class RukovodilacForma extends javax.swing.JFrame {
             return;
         }
         RukovodilacKooperacije rk=pom.get(izabrani);
+        
         boolean uspeh=promeniRukovodilacKooperacije(rk);
         if(uspeh){
             JOptionPane.showMessageDialog(this, "Rukovodilac je uspesno promenjen","Potvrda",JOptionPane.INFORMATION_MESSAGE);

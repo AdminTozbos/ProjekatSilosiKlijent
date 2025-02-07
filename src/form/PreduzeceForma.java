@@ -7,12 +7,16 @@ package form;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import komunikacija.Komunikacija;
 import model.KlijentskiZahtev;
 import model.ModelTabelePreduzeca;
 import model.Operacije;
 import model.PoljoprivrednoPreduzece;
 import model.Potvrda;
+import model.RukovodilacKooperacije;
 import model.ServerskiOdgovor;
 import niti.PreduzeceNit;
 
@@ -41,6 +45,31 @@ public class PreduzeceForma extends javax.swing.JFrame {
         initComponents();
         PreduzeceNit pn=new PreduzeceNit(jTable1,this);
         pn.start();
+        ListSelectionModel selectionModel = jTable1.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        try {
+            selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int izabrani = jTable1.getSelectedRow();
+                    if (izabrani != -1) {
+                       PoljoprivrednoPreduzece rk=pom.get(izabrani);
+                       jTextField1.setText(rk.getNazivKooperanta());
+                       jTextField2.setText(rk.getMesto());
+                       jTextField3.setText(rk.getPravniZastupnik());
+                       jTextField4.setText(rk.getPib());
+                       jTextField5.setText(rk.getEmail());
+                       
+                    
+                    }
+                
+                
+                }
+            }
+        });
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -259,6 +288,7 @@ public class PreduzeceForma extends javax.swing.JFrame {
             return;
         }
         PoljoprivrednoPreduzece pp=pom.get(izabrani);
+        
         boolean uspeh=promeniPoljoprivrednoPreduzece(pp);
         if(uspeh){
             JOptionPane.showMessageDialog(this, "Preduzece je uspesno promenjeno","Potvrda",JOptionPane.INFORMATION_MESSAGE);
@@ -331,9 +361,9 @@ public class PreduzeceForma extends javax.swing.JFrame {
     }
 
     private boolean proveriPreduzece(PoljoprivrednoPreduzece pp) {
-        if(!pp.getMesto().matches("[A-Za-z]+"))return false;
-        if(!pp.getNazivKooperanta().matches("[A-Za-z]+"))return false;
-        if(!pp.getPravniZastupnik().matches("[A-Za-z]+"))return false;
+        if(!pp.getMesto().matches("[A-Za-z]+ "))return false;
+        if(!pp.getNazivKooperanta().matches("[A-Za-z]+ "))return false;
+        if(!pp.getPravniZastupnik().matches("[A-Za-z]+ "))return false;
         if(pp.getPib().length()!=13)return false;
         if(!pp.getPib().matches("[0-9]*"))return false;
         if(!pp.getEmail().matches("[A-Za-z0-9]+@[A-Za-z0-9]+.[A-Za-z]"))return false;
@@ -385,6 +415,7 @@ public class PreduzeceForma extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sistem nije pronasao vrednosti po zadatom kriterijumu");
             return;
         }
+        this.pom=pom;
         ModelTabelePreduzeca mtr=new ModelTabelePreduzeca(pom);
         jTable1.setModel(mtr);
     }

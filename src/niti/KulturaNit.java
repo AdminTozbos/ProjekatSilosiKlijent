@@ -10,6 +10,9 @@ import java.lang.System.Logger.Level;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import komunikacija.Komunikacija;
 import model.KlijentskiZahtev;
 import model.ModelTabelaKultura;
@@ -33,16 +36,20 @@ public class KulturaNit extends Thread{
     public KulturaNit(JTable tabela,KulturaForma kf) {
         this.tabela=tabela;
          this.kf=kf;
+         
+        
     }
 
     @Override
     public void run() {
         while (true) {            
             try {
+                
                 vratiListuSviPoljoprivrednaKultura(kulture);
                 kf.setKulture(kulture);
                 ModelTabelaKultura mtr=new ModelTabelaKultura(kulture);
                 tabela.setModel(mtr);
+               
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {
                 System.out.println("Greska");
@@ -59,6 +66,7 @@ public class KulturaNit extends Thread{
             JOptionPane.showMessageDialog(kf, "Doslo je do greske prilikom vracanja");
             return;
         }
+        kf.setKulture(kulture);
     }
     
 }
