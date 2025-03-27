@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import model.PoljoprivrednoGazdinstvo;
 
 
@@ -13,12 +15,57 @@ import model.PoljoprivrednoGazdinstvo;
  * @author Miloš
  */
 public class KlijentskaForma extends javax.swing.JFrame {
-
+    int jezik=0;
     /**
      * Creates new form ServerskaForma
      */
     public KlijentskaForma() {
         initComponents();
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("SRB");
+        jComboBox1.addItem("ENG");
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox1.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    jLabel1.setText("Jezik :");
+                    jMenu1.setText("Dokumenti");
+                    jMenu2.setText("Pruzalac usluge");
+                    jMenu3.setText("Primalac usluge");
+                    jMenu4.setText("Sifarnici");
+                    jMenu5.setText("Podesavanja");
+                    jMenu6.setText("O programu");
+                    jMenuItem1.setText("Potvrda");
+                    jMenuItem2.setText("Rukovodilac kooperacije");
+                    jMenuItem8.setText("Iskustvo rukovodioca");
+                    jMenuItem3.setText("Kooperant");
+                    jMenuItem4.setText("Poljoprivredno gazdinstvo");
+                    jMenuItem5.setText("Poljoprivredno preduzece");
+                    jMenuItem6.setText("Poljoprivredna kultura");
+                    jMenuItem7.setText("Radno iskustvo");
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel1.setText("Language :");
+                    jMenu1.setText("Documents");
+                    jMenu2.setText("Service provider");
+                    jMenu3.setText("Customer");
+                    jMenu4.setText("Provider");
+                    jMenu5.setText("Settings");
+                    jMenu6.setText("About");
+                    jMenuItem1.setText("Receipt");
+                    jMenuItem2.setText("Cooperation manager");
+                    jMenuItem8.setText("Manager experience");
+                    jMenuItem3.setText("Cooperant");
+                    jMenuItem4.setText("Agricultural holding");
+                    jMenuItem5.setText("Agricultural company");
+                    jMenuItem6.setText("Agricultural crop");
+                    jMenuItem7.setText("Work experience");
+                    jezik=1;
+                }
+            }
+        });
        
     }
 
@@ -31,6 +78,8 @@ public class KlijentskaForma extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -48,6 +97,10 @@ public class KlijentskaForma extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setText("Jezik");
 
         jMenu1.setText("Dokumenti");
 
@@ -141,11 +194,21 @@ public class KlijentskaForma extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 662, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(484, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
 
         pack();
@@ -228,6 +291,8 @@ public class KlijentskaForma extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

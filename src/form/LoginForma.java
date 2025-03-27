@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,12 +21,36 @@ import model.ServerskiOdgovor;
  */
 public class LoginForma extends javax.swing.JFrame {
     int loginBrojac=3;
+    int jezik=0;
     /**
      * Creates new form LoginForma
      */
     public LoginForma() {
         initComponents();
         Komunikacija k=Komunikacija.getInstance();
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("SRB");
+        jComboBox1.addItem("ENG");
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox1.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    jLabel3.setText("Jezik :");
+                    jLabel1.setText("Korisnicko ime");
+                    jLabel2.setText("Lozinka");
+                    jButton1.setText("Uloguj se");
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel3.setText("Language :");
+                    jLabel1.setText("Username");
+                    jLabel2.setText("Password");
+                    jButton1.setText("Login");
+                    jezik=1;
+                }
+            }
+        });
     }
     public RukovodilacKooperacije prijaviRukovodilacKooperacije(String korisnickoIme,String sifra){
         List<String>parametri=new ArrayList<>();
@@ -50,6 +76,8 @@ public class LoginForma extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,29 +92,45 @@ public class LoginForma extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setText("Jezik :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(149, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(27, 27, 27))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(52, 52, 52))
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -94,9 +138,9 @@ public class LoginForma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
 
         pack();
@@ -112,17 +156,25 @@ public class LoginForma extends javax.swing.JFrame {
         RukovodilacKooperacije r=prijaviRukovodilacKooperacije(username, password);
         if(r==null){
             if(loginBrojac==1){
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Nemate vise pokusaja","Obavestenje",JOptionPane.INFORMATION_MESSAGE);
+                else                JOptionPane.showMessageDialog(this, "You have no tries remaining","Message",JOptionPane.INFORMATION_MESSAGE);
+
                 this.dispose();
                 return;
             }
-            JOptionPane.showMessageDialog(this, "Parametri za prijavu nisu tacni\n"+"Ostalo vam je jos "+(--loginBrojac)+" pokusaja", "Greska", JOptionPane.ERROR_MESSAGE);
-            
+            if(jezik==0)JOptionPane.showMessageDialog(this, "Parametri za prijavu nisu tacni\n"+"Ostalo vam je jos "+(--loginBrojac)+" pokusaja", "Greska", JOptionPane.ERROR_MESSAGE);
+            else  JOptionPane.showMessageDialog(this, "Login credentials are incorrect\n"+"You have"+(--loginBrojac)+" tries remaining", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
         else{
+           if (jezik==0)
            JOptionPane.showMessageDialog(this, "Uspesno ste se prijavili");
+           else JOptionPane.showMessageDialog(this, "Login has been successful");
+
            KlijentskaForma kf=new KlijentskaForma();
            kf.setVisible(true);
+           
            this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -164,8 +216,10 @@ public class LoginForma extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

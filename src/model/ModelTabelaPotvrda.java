@@ -19,6 +19,8 @@ public class ModelTabelaPotvrda extends AbstractTableModel{
     List<PoljoprivrednoPreduzece>preduzeca;
     
     String []kolone={"kooperant","rukovodilac","datum izdavanja","datum vazenja","iznos"};
+        String []kolone2={"cooperant","manager","date of issue","date of expiry","total"};
+        int jezik;
     public List<Potvrda> getPotvrde() {
         return potvrde;
     }
@@ -27,11 +29,12 @@ public class ModelTabelaPotvrda extends AbstractTableModel{
         this.potvrde = potvrde;
     }
 
-    public ModelTabelaPotvrda(List<Potvrda>potvrde,List<RukovodilacKooperacije>rukovodioci,List<PoljoprivrednoGazdinstvo>gazdinstva, List<PoljoprivrednoPreduzece>preduzeca){
+    public ModelTabelaPotvrda(List<Potvrda>potvrde,List<RukovodilacKooperacije>rukovodioci,List<PoljoprivrednoGazdinstvo>gazdinstva, List<PoljoprivrednoPreduzece>preduzeca,int jezik){
         this.potvrde=potvrde;
         this.gazdinstva=gazdinstva;
         this.preduzeca=preduzeca;
         this.rukovodioci=rukovodioci;
+        this.jezik=jezik;
     }
     
     @Override
@@ -84,7 +87,8 @@ public class ModelTabelaPotvrda extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
-        return kolone[column];
+        if(jezik==0)return kolone[column];
+        else return kolone2[column];
     }
     
 }

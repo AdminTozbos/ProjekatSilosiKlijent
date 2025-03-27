@@ -14,7 +14,8 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTabelePreduzeca extends AbstractTableModel{
     private List<PoljoprivrednoPreduzece>preduzeca;
     String []kolone={"naziv","mesto","zastupnik","pib","email"};
-
+    String []kolone2={"name","location","agent","pib","email"};
+    int jezik;
     public List<PoljoprivrednoPreduzece> getPreduzeca() {
         return preduzeca;
     }
@@ -22,8 +23,9 @@ public class ModelTabelePreduzeca extends AbstractTableModel{
     public void setPreduzeca(List<PoljoprivrednoPreduzece> preduzeca) {
         this.preduzeca = preduzeca;
     }
-    public ModelTabelePreduzeca(List<PoljoprivrednoPreduzece>preduzeca){
+    public ModelTabelePreduzeca(List<PoljoprivrednoPreduzece>preduzeca,int jezik){
         this.preduzeca=preduzeca;
+        this.jezik=jezik;
     }
     @Override
     public int getRowCount() {
@@ -52,6 +54,7 @@ public class ModelTabelePreduzeca extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
-        return kolone[column];
+        if(jezik==0)return kolone[column];
+        else return kolone2[column];
     }
 }

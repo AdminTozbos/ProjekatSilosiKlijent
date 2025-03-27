@@ -15,7 +15,8 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTabeleGazdinstvo extends AbstractTableModel{
     private List<PoljoprivrednoGazdinstvo>gazdinstva;
     String []kolone={"naziv","mesto","vlasnik","broj telefona"};
-
+    String []kolone2={"name","location","owner","phone number"};
+    int jezik;
     public List<PoljoprivrednoGazdinstvo> getGazdinstva() {
         return gazdinstva;
     }
@@ -23,8 +24,9 @@ public class ModelTabeleGazdinstvo extends AbstractTableModel{
     public void setGazdinstva(List<PoljoprivrednoGazdinstvo> gazdinstva) {
         this.gazdinstva = gazdinstva;
     }
-    public ModelTabeleGazdinstvo(List<PoljoprivrednoGazdinstvo>gazdinstva){
+    public ModelTabeleGazdinstvo(List<PoljoprivrednoGazdinstvo>gazdinstva,int jezik){
         this.gazdinstva=gazdinstva;
+        this.jezik=jezik;
     }
     @Override
     public int getRowCount() {
@@ -52,6 +54,7 @@ public class ModelTabeleGazdinstvo extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
-        return kolone[column];
+        if(jezik==0)return kolone[column];
+        else return kolone2[column];
     }
 }

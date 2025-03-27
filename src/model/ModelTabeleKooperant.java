@@ -14,7 +14,8 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTabeleKooperant extends AbstractTableModel{
     private List<Kooperant>kooperanti;
     String []kolone={"naziv","mesto"};
-
+    String []kolone2={"name","location"};
+    int jezik;
     public List<Kooperant> getKooperanti() {
         return kooperanti;
     }
@@ -22,8 +23,9 @@ public class ModelTabeleKooperant extends AbstractTableModel{
     public void setKooperanti(List<Kooperant> kooperanti) {
         this.kooperanti = kooperanti;
     }
-    public ModelTabeleKooperant(List<Kooperant>kooperanti){
+    public ModelTabeleKooperant(List<Kooperant>kooperanti,int jezik){
         this.kooperanti=kooperanti;
+        this.jezik=jezik;
     }
     @Override
     public int getRowCount() {
@@ -54,7 +56,8 @@ public class ModelTabeleKooperant extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
-        return kolone[column];
+        if(jezik==0)return kolone[column];
+        else return kolone2[column];
     }
  
     

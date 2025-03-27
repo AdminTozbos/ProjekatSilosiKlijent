@@ -47,7 +47,7 @@ public class GazdinstvoNit extends Thread{
             try {
                 vratiListuSviPoljoprivrednoGazdinstvo(gazdinstva);
                 pf.setGazdinstvo(gazdinstva);
-                ModelTabeleGazdinstvo mtr=new ModelTabeleGazdinstvo(gazdinstva);
+                ModelTabeleGazdinstvo mtr=new ModelTabeleGazdinstvo(gazdinstva,pf.getJezik());
                 tabela.setModel(mtr);
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {

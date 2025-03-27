@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -29,7 +31,15 @@ import niti.PreduzeceNit;
 public class GazdinstvoForma extends javax.swing.JFrame {
     private List<PoljoprivrednoGazdinstvo>gazdinstva;
     private List<PoljoprivrednoGazdinstvo>pom;
+    int jezik=0;
 
+    public int getJezik() {
+        return jezik;
+    }
+
+    public void setJezik(int jezik) {
+        this.jezik = jezik;
+    }
     public List<PoljoprivrednoGazdinstvo> getGazdinstvo() {
         return gazdinstva;
     }
@@ -69,6 +79,42 @@ public class GazdinstvoForma extends javax.swing.JFrame {
         });
         } catch (Exception e) {
         }
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("SRB");
+        jComboBox1.addItem("ENG");
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox1.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    jLabel3.setText("Vlasnik");
+                    jLabel1.setText("Naziv");
+                    jLabel2.setText("Mesto");
+                    jLabel4.setText("Br tel");
+                    jLabel5.setText("Jezik :");
+                    jButton1.setText("Unesi gazdinstvo");
+                    jButton2.setText("Izmeni gazdinstvo");
+                    jButton3.setText("Obrisi gazdinstvo");
+                    jButton4.setText("Pretrazi gazdinstvo");
+                    jButton5.setText("Nazad");
+                    //jButton1.setText("Uloguj se");
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel3.setText("Owner");
+                    jLabel1.setText("Name");
+                    jLabel2.setText("Hometown");
+                    jLabel4.setText("Phone");
+                    jLabel5.setText("Language :");
+                    jButton1.setText("Insert holding");
+                    jButton2.setText("Update holding");
+                    jButton3.setText("Delete holding");
+                    jButton4.setText("Search holding");
+                    jButton5.setText("Back");
+                    jezik=1;
+                }
+            }
+        });
     }
 
     /**
@@ -95,6 +141,8 @@ public class GazdinstvoForma extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,12 +202,28 @@ public class GazdinstvoForma extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Jezik :");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton5)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -172,33 +236,32 @@ public class GazdinstvoForma extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(8, 8, 8)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(35, 35, 35)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -217,20 +280,14 @@ public class GazdinstvoForma extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addGap(19, 19, 19))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -253,33 +310,56 @@ public class GazdinstvoForma extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int izabrani=jTable1.getSelectedRow();
-        if(izabrani==-1){
+        if(izabrani==-1&&jezik==0){
             JOptionPane.showMessageDialog(this, "Morate izabrati gazdinstvo", "Greska", JOptionPane.WARNING_MESSAGE);
+            return;
+        }if(izabrani==-1&&jezik==1){
+            JOptionPane.showMessageDialog(this, "You have to choose holding", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
         PoljoprivrednoGazdinstvo pg=pom.get(izabrani);
         boolean uspeh=obrisiPoljoprivrednoGazdinstvo(pg);
-        if(uspeh){
+        if(uspeh&&jezik==0){
             JOptionPane.showMessageDialog(this, "Gazdinstvo je uspesno obrisano","Potvrda",JOptionPane.INFORMATION_MESSAGE);
         }
         else{
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio brisanje","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+        }
+        if(uspeh&&jezik==1){
+            JOptionPane.showMessageDialog(this, "Holding is successfully deleted","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Holdicn could not be deleted","Error",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
-            JOptionPane.showMessageDialog(this, "Morate izabrati gazdinstvo", "Greska", JOptionPane.WARNING_MESSAGE);
-            return;
+            if(jezik==0){
+                JOptionPane.showMessageDialog(this, "Morate izabrati gazdinstvo", "Greska", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            else{
+               JOptionPane.showMessageDialog(this, "You have to choose holding", "Error", JOptionPane.WARNING_MESSAGE);
+                return; 
+            }
+            
         }
         PoljoprivrednoGazdinstvo pg=pom.get(izabrani);
         boolean uspeh=promeniPoljoprivrednoGazdinstvo(pg);
         if(uspeh){
-            JOptionPane.showMessageDialog(this, "Gazdinstvo je uspesno promenjeno","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            if(jezik==0){            
+                JOptionPane.showMessageDialog(this, "Gazdinstvo je uspesno promenjeno","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else  JOptionPane.showMessageDialog(this, "Holding is successfully updated","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio promenu","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Holding could not be updated","Error",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -311,10 +391,12 @@ public class GazdinstvoForma extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
@@ -331,15 +413,24 @@ public class GazdinstvoForma extends javax.swing.JFrame {
             ServerskiOdgovor so=Komunikacija.getInstance().primiOdgovor();
             boolean uspeh=(boolean) so.getOdgovor();
             if(uspeh){
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem je zapamtio gazdinstvo");
+                else JOptionPane.showMessageDialog(this, "System has saved the holding");
+
             }
             else{
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem nije zapamtio gazdinstvo","Greska",JOptionPane.ERROR_MESSAGE);
+                else JOptionPane.showMessageDialog(this, "System could not save the holding","Error",JOptionPane.ERROR_MESSAGE);
+
             }
             return;
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Uneli ste nedozvoljenu vrednost polja","Greska",JOptionPane.ERROR_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "You have entered disallowed value","Error",JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -393,11 +484,14 @@ public class GazdinstvoForma extends javax.swing.JFrame {
             }
         }
         if(pom.isEmpty()){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije pronasao vrednosti po zadatom kriterijumu");
+            else JOptionPane.showMessageDialog(this, "System could not find values for given criteria");
+
             return;
         }
         this.pom=pom;
-        ModelTabeleGazdinstvo mtr=new ModelTabeleGazdinstvo(pom);
+        ModelTabeleGazdinstvo mtr=new ModelTabeleGazdinstvo(pom,jezik);
         jTable1.setModel(mtr);
     }
 }

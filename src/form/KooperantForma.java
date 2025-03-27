@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -33,9 +35,18 @@ import niti.KooperantNit;
 public class KooperantForma extends javax.swing.JFrame {
     List<Kooperant>kooperanti;
     List<Kooperant>pom;
+    int jezik=0;
 
     public List<Kooperant> getKooperanti() {
         return kooperanti;
+    }
+
+    public int getJezik() {
+        return jezik;
+    }
+
+    public void setJezik(int jezik) {
+        this.jezik = jezik;
     }
 
     public void setKooperanti(List<Kooperant> kooperanti) {
@@ -124,6 +135,53 @@ public class KooperantForma extends javax.swing.JFrame {
         });
         } catch (Exception e) {
         }
+         jComboBox1.removeAllItems();
+        jComboBox1.addItem("SRB");
+        jComboBox1.addItem("ENG");
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox1.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    jLabel3.setText("Vlasnik");
+                    jLabel1.setText("Naziv");
+                    jLabel2.setText("Mesto");
+                    jLabel4.setText("Broj telefona");
+                    jLabel5.setText("Zastupnik");
+                    jLabel6.setText("PIB");
+                    jLabel7.setText("Email");
+                    jLabel8.setText("Jezik :");
+                    jButton1.setText("Unesi kooperanta");
+                    jButton3.setText("Izmeni kooperanta");
+                    jButton4.setText("Obrisi kooperanta");
+                    jButton5.setText("Pretrazi kooperanta");
+                    jCheckBox1.setText("Preduzece");
+                    jCheckBox2.setText("Gazdinstvo");
+
+                    jButton6.setText("Nazad");
+                    //jButton1.setText("Uloguj se");
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel3.setText("Owner");
+                    jLabel1.setText("Name");
+                    jLabel2.setText("Hometown");
+                    jLabel4.setText("Phone");
+                    jLabel5.setText("Agent");
+                    jLabel6.setText("PIB");
+                    jLabel7.setText("Email");
+                    jLabel8.setText("Language :");
+                    jButton1.setText("Insert cooperant");
+                    jButton3.setText("Update cooperant");
+                    jButton4.setText("Delete cooperant");
+                    jButton5.setText("Search cooperant");
+                    jButton6.setText("Back");
+                    jCheckBox1.setText("Company");
+                    jCheckBox2.setText("Holding");
+                    jezik=1;
+                }
+            }
+        });
     }
 
     /**
@@ -158,6 +216,8 @@ public class KooperantForma extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -227,6 +287,10 @@ public class KooperantForma extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Jezik :");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -235,58 +299,71 @@ public class KooperantForma extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextField4))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField5)
+                                        .addComponent(jTextField6)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextField3)
+                                        .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField4))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField5)
-                                    .addComponent(jTextField6)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2))))
-                        .addGap(46, 46, 46)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(34, 34, 34)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addComponent(jButton6))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(55, 55, 55)
-                        .addComponent(jButton3)
-                        .addGap(56, 56, 56)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(55, 55, 55)
+                                .addComponent(jButton3)
+                                .addGap(56, 56, 56)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)
+                                .addComponent(jButton5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -294,10 +371,10 @@ public class KooperantForma extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(21, 21, 21)
+                            .addGap(26, 26, 26)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jCheckBox1)
                                 .addComponent(jCheckBox2))
@@ -329,9 +406,8 @@ public class KooperantForma extends javax.swing.JFrame {
                         .addComponent(jButton6)
                         .addGap(319, 319, 319)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton1)
                     .addComponent(jButton5)
                     .addComponent(jButton4))
                 .addGap(14, 14, 14))
@@ -347,16 +423,25 @@ public class KooperantForma extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati kooperanta", "Greska", JOptionPane.WARNING_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "You have to choose cooperant", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         Kooperant rk=pom.get(izabrani);
         boolean uspeh=obrisiKooperant(rk);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Kooperant je uspesno obrisan","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Cooperant has been deleted successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio brisanje","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "System could not delete the cooperant","Error",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -368,16 +453,25 @@ public class KooperantForma extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati kooperanta", "Greska", JOptionPane.WARNING_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "You have to choose the cooperant", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         Kooperant rk=pom.get(izabrani);
         boolean uspeh=izmeniKooperant(rk);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Kooperant je uspesno izmenjen","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Cooperant has been deleted successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio izmenu","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "System has updated the cooperant","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -444,6 +538,7 @@ public class KooperantForma extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -451,6 +546,7 @@ public class KooperantForma extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
@@ -497,15 +593,25 @@ public class KooperantForma extends javax.swing.JFrame {
             ServerskiOdgovor so=Komunikacija.getInstance().primiOdgovor();
             boolean uspeh=(boolean) so.getOdgovor();
             if(uspeh){
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem je zapamtio kooperanta");
+                else JOptionPane.showMessageDialog(this, "System has saved the cooperant");
+
             }
             else{
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem nije zapamtio kooperanta","Greska",JOptionPane.ERROR_MESSAGE);
+                else  JOptionPane.showMessageDialog(this, "System could not save the cooperant","Error",JOptionPane.ERROR_MESSAGE);
+
+            
             }
             return;
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Uneli ste nedozvoljenu vrednost polja","Greska",JOptionPane.ERROR_MESSAGE);
+            else           JOptionPane.showMessageDialog(this, "You entered disallowed field value","Error",JOptionPane.ERROR_MESSAGE);
+
         }
         }
         else if(jCheckBox2.isSelected()){
@@ -517,19 +623,31 @@ public class KooperantForma extends javax.swing.JFrame {
             ServerskiOdgovor so=Komunikacija.getInstance().primiOdgovor();
             boolean uspeh=(boolean) so.getOdgovor();
             if(uspeh){
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem je zapamtio kooperanta");
+                else JOptionPane.showMessageDialog(this, "System has saved the cooperant");
+
             }
             else{
+                if (jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem nije zapamtio kooperanta","Greska",JOptionPane.ERROR_MESSAGE);
+                else JOptionPane.showMessageDialog(this, "System could not save the cooperant","Error",JOptionPane.ERROR_MESSAGE);
+
             }
             return;
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Uneli ste nedozvoljenu vrednost polja","Greska",JOptionPane.ERROR_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "You entered disallowed field value","Error",JOptionPane.ERROR_MESSAGE);
+
         }
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati vrstu kooperanta", "Greska", JOptionPane.WARNING_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "You have to choose cooperant type", "Error", JOptionPane.WARNING_MESSAGE);
+
         }
         
         
@@ -631,11 +749,14 @@ public class KooperantForma extends javax.swing.JFrame {
             }
         }
         if(pom.isEmpty()){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije pronasao vrednosti po zadatom kriterijumu");
+            else            JOptionPane.showMessageDialog(this, "System could not find values according to given criteria");
+
             return;
         }
         this.pom=pom;
-        ModelTabeleKooperant mtr=new ModelTabeleKooperant(pom);
+        ModelTabeleKooperant mtr=new ModelTabeleKooperant(pom,jezik);
         jTable1.setModel(mtr);
     }
 }

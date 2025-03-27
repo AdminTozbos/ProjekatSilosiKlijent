@@ -44,7 +44,7 @@ public class PreduzeceNit extends Thread{
             try {
                 vratiListuSviPoljoprivrednoPreduzece(preduzeca);
                 pf.setPreduzeca(preduzeca);
-                ModelTabelePreduzeca mtr=new ModelTabelePreduzeca(preduzeca);
+                ModelTabelePreduzeca mtr=new ModelTabelePreduzeca(preduzeca,pf.getJezik());
                 tabela.setModel(mtr);
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {

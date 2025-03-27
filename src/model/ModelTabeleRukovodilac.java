@@ -14,7 +14,8 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTabeleRukovodilac extends AbstractTableModel{
     private List<RukovodilacKooperacije>rukovodioci;
     String []kolone={"ime","prezime","broj telefona"};
-
+    String []kolone2={"name","surname","phone number"};
+    int jezik;
     public List<RukovodilacKooperacije> getRukovodioci() {
         return rukovodioci;
     }
@@ -22,8 +23,9 @@ public class ModelTabeleRukovodilac extends AbstractTableModel{
     public void setRukovodioci(List<RukovodilacKooperacije> rukovodioci) {
         this.rukovodioci = rukovodioci;
     }
-    public ModelTabeleRukovodilac(List<RukovodilacKooperacije>rukovodioci){
+    public ModelTabeleRukovodilac(List<RukovodilacKooperacije>rukovodioci,int jezik){
         this.rukovodioci=rukovodioci;
+        this.jezik=jezik;
     }
     @Override
     public int getRowCount() {
@@ -54,7 +56,8 @@ public class ModelTabeleRukovodilac extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
-        return kolone[column];
+        if(jezik==0)return kolone[column];
+        else return kolone2[column];
     }
  
     

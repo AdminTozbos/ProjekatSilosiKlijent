@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +31,18 @@ public class PotvrdaGlavnaForma extends javax.swing.JFrame {
     List<PoljoprivrednoGazdinstvo>gazdinstva;
     List<PoljoprivrednoPreduzece>preduzeca;
     List<Potvrda>pom;
-    
+    int jezik=0;
 
     public List<Potvrda> getPotvrde() {
         return potvrde;
+    }
+
+    public int getJezik() {
+        return jezik;
+    }
+
+    public void setJezik(int jezik) {
+        this.jezik = jezik;
     }
 
     public void setPotvrde(List<Potvrda> potvrde) {
@@ -71,6 +81,46 @@ public class PotvrdaGlavnaForma extends javax.swing.JFrame {
         initComponents();
         PotvrdaNit nit =new PotvrdaNit(jTable1, this);
         nit.start();
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("SRB");
+        jComboBox1.addItem("ENG");
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox1.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    jLabel3.setText("Rukovodilac");
+                    jLabel1.setText("Datum izdavanja");
+                    jLabel2.setText("Datum vazenja");
+                    jLabel4.setText("Kooperant");
+                    jLabel5.setText("Jezik :");
+
+                    jButton1.setText("Unesi potvrdu");
+                    jButton2.setText("Prikazi potvrdu");
+                    jButton3.setText("Obrisi potvrdu");
+                    jButton4.setText("Pretrazi potvrdu");
+                    jButton5.setText("Promeni potvrdu");
+                    jButton6.setText("Nazad");
+                    
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel3.setText("Manager");
+                    jLabel1.setText("Date of issue");
+                    jLabel2.setText("Date of validity");
+                    jLabel4.setText("Cooperant");
+                    jLabel5.setText("Language :");
+
+                    jButton1.setText("Insert receipt");
+                    jButton2.setText("Show receipt");
+                    jButton3.setText("Delete receipt");
+                    jButton4.setText("Search receipt");
+                    jButton5.setText("Update receipt");
+                    jButton6.setText("Back");
+                    jezik=1;
+                }
+            }
+        });
     }
 
     /**
@@ -98,6 +148,8 @@ public class PotvrdaGlavnaForma extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,50 +216,66 @@ public class PotvrdaGlavnaForma extends javax.swing.JFrame {
 
         jLabel4.setText("Kooperant");
 
+        jLabel5.setText("Jezik :");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
-                .addGap(6, 6, 6))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                        .addGap(6, 6, 6))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
@@ -254,16 +322,26 @@ public class PotvrdaGlavnaForma extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati potvrdu", "Greska", JOptionPane.WARNING_MESSAGE);
+            
+            else            JOptionPane.showMessageDialog(this, "You have to choose receipt", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         Potvrda pp=pom.get(izabrani);
         boolean uspeh=obrisiPotvrda(pp);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Potvrda je uspesno obrisana","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "Receipt has been deleted successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+           if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio brisanje","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+           else JOptionPane.showMessageDialog(this, "System could not execute delete command","Error",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -285,7 +363,11 @@ public class PotvrdaGlavnaForma extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+             if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati potvrdu", "Greska", JOptionPane.WARNING_MESSAGE);
+            
+            else            JOptionPane.showMessageDialog(this, "You have to choose receipt", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         Potvrda pp=pom.get(izabrani);
@@ -296,7 +378,11 @@ public class PotvrdaGlavnaForma extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+             if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati potvrdu", "Greska", JOptionPane.WARNING_MESSAGE);
+            
+            else            JOptionPane.showMessageDialog(this, "You have to choose receipt", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         Potvrda pp=pom.get(izabrani);
@@ -346,10 +432,12 @@ public class PotvrdaGlavnaForma extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
@@ -380,10 +468,13 @@ public class PotvrdaGlavnaForma extends javax.swing.JFrame {
             }
         }
         if(this.pom.isEmpty()){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije pronasao vrednosti po zadatom kriterijumu");
+            else             JOptionPane.showMessageDialog(this, "System could not find values according to given criteria");
+
             return;
         }
-        ModelTabelaPotvrda mtr=new ModelTabelaPotvrda(this.pom, rukovodioci, gazdinstva, preduzeca);
+        ModelTabelaPotvrda mtr=new ModelTabelaPotvrda(this.pom, rukovodioci, gazdinstva, preduzeca,jezik);
         jTable1.setModel(mtr);
     }
 

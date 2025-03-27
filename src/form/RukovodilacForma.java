@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -26,9 +28,17 @@ import niti.RukovodilacNit;
 public class RukovodilacForma extends javax.swing.JFrame {
     private List<RukovodilacKooperacije>rukovodioci;
     private List<RukovodilacKooperacije>pom;
-
+    int jezik=0;
     public List<RukovodilacKooperacije> getRukovodioci() {
         return rukovodioci;
+    }
+
+    public int getJezik() {
+        return jezik;
+    }
+
+    public void setJezik(int jezik) {
+        this.jezik = jezik;
     }
 
     public void setRukovodioci(List<RukovodilacKooperacije> rukovodioci) {
@@ -66,6 +76,40 @@ public class RukovodilacForma extends javax.swing.JFrame {
         });
         } catch (Exception e) {
         }
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("SRB");
+        jComboBox1.addItem("ENG");
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox1.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    jLabel3.setText("Broj telefona");
+                    jLabel1.setText("Ime");
+                    jLabel2.setText("Prezime");
+                    jLabel4.setText("Jezik :");
+                    jButton1.setText("Kreiraj rukovodioca");
+                    jButton2.setText("Obrisi rukovodioca");
+                    jButton3.setText("Pretrazi rukovodioca");
+                    jButton4.setText("Promeni rukovodioca");
+                    jButton5.setText("Nazad");
+                    
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel3.setText("Phone number");
+                    jLabel1.setText("Name");
+                    jLabel2.setText("Surname");
+                    jLabel4.setText("Language :");
+                    jButton1.setText("Create manager");
+                    jButton2.setText("Delete manager");
+                    jButton3.setText("Search manager");
+                    jButton4.setText("Update manager");
+                    jButton5.setText("Back");
+                    jezik=1;
+                }
+            }
+        });
     }
 
     /**
@@ -90,6 +134,8 @@ public class RukovodilacForma extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,6 +193,10 @@ public class RukovodilacForma extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Jezik");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,33 +204,43 @@ public class RukovodilacForma extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(92, 92, 92))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(92, 92, 92))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,7 +263,7 @@ public class RukovodilacForma extends javax.swing.JFrame {
                         .addComponent(jButton5)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14))))
         );
@@ -237,33 +297,51 @@ public class RukovodilacForma extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if (jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati rukovodioca", "Greska", JOptionPane.WARNING_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "You have to choose manager", "Greska", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         RukovodilacKooperacije rk=pom.get(izabrani);
         boolean uspeh=obrisiRukovodilacKooperacije(rk);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Rukovodilac je uspesno obrisan","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "Manager has been deleted successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio brisanje","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "System could not execute delete operation","Error",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati rukovodioca", "Greska", JOptionPane.WARNING_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "You have to choose manager", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         RukovodilacKooperacije rk=pom.get(izabrani);
         
         boolean uspeh=promeniRukovodilacKooperacije(rk);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Rukovodilac je uspesno promenjen","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "Manager has been changed successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio promenu","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "System could not execute update","Error",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -308,9 +386,11 @@ public class RukovodilacForma extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
@@ -337,10 +417,13 @@ public class RukovodilacForma extends javax.swing.JFrame {
             }
         }
         if(pom.isEmpty()){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije pronasao vrednosti po zadatom kriterijumu");
+            else            JOptionPane.showMessageDialog(this, "System could nof find values according to given criteria");
+
             return;
         }
-        ModelTabeleRukovodilac mtr=new ModelTabeleRukovodilac(pom);
+        ModelTabeleRukovodilac mtr=new ModelTabeleRukovodilac(pom,jezik);
         jTable1.setModel(mtr);
     }
 
@@ -376,15 +459,24 @@ public class RukovodilacForma extends javax.swing.JFrame {
             ServerskiOdgovor so=Komunikacija.getInstance().primiOdgovor();
             boolean uspeh=(boolean) so.getOdgovor();
             if(uspeh){
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem je zapamtio rukovodioca");
+                else                JOptionPane.showMessageDialog(this, "System has saved manager");
+
             }
             else{
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem nije zapamtio rukovodioca","Greska",JOptionPane.ERROR_MESSAGE);
+                else                JOptionPane.showMessageDialog(this, "System could not save the manager","Error",JOptionPane.ERROR_MESSAGE);
+
             }
             return;
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Uneli ste nedozvoljenu vrednost polja","Greska",JOptionPane.ERROR_MESSAGE);
+            else             JOptionPane.showMessageDialog(this, "You have entered disallowed field value","Error",JOptionPane.ERROR_MESSAGE);
+
         }
     }
     

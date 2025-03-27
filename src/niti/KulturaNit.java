@@ -47,7 +47,7 @@ public class KulturaNit extends Thread{
                 
                 vratiListuSviPoljoprivrednaKultura(kulture);
                 kf.setKulture(kulture);
-                ModelTabelaKultura mtr=new ModelTabelaKultura(kulture);
+                ModelTabelaKultura mtr=new ModelTabelaKultura(kulture,kf.getJezik());
                 tabela.setModel(mtr);
                
                 Thread.sleep(10000);

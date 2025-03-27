@@ -54,7 +54,7 @@ public class PotvrdaNit extends Thread{
                 kf.setRukovodioci(rukovodioci);
                 kf.setPreduzeca(preduzeca);
                 kf.setGazdinstva(gazdinstva);
-                ModelTabelaPotvrda mtr=new ModelTabelaPotvrda(potvrde,rukovodioci,gazdinstva,preduzeca);
+                ModelTabelaPotvrda mtr=new ModelTabelaPotvrda(potvrde,rukovodioci,gazdinstva,preduzeca,kf.getJezik());
                 tabela.setModel(mtr);
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {

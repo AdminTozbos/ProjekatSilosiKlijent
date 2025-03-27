@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -26,7 +28,15 @@ import niti.RadnoIskustvoNit;
 public class IskustvoForma extends javax.swing.JFrame {
     List<RadnoIskustvo>iskustva;
     List<RadnoIskustvo>pom;
+    int jezik=0;
 
+    public int getJezik() {
+        return jezik;
+    }
+
+    public void setJezik(int jezik) {
+        this.jezik = jezik;
+    }
     public List<RadnoIskustvo> getIskustva() {
         return iskustva;
     }
@@ -65,6 +75,40 @@ public class IskustvoForma extends javax.swing.JFrame {
         });
         } catch (Exception e) {
         }
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("SRB");
+        jComboBox1.addItem("ENG");
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox1.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    
+                    jLabel1.setText("Unesite firmu");
+                    jLabel2.setText("Jezik :");
+                    
+                    jButton1.setText("Dodaj radno iskustvo");
+                    jButton2.setText("Izmeni radno iskustvo");
+                    jButton3.setText("Obrisi radno iskustvo");
+                    jButton4.setText("Pretrazi radno iskustvo");
+                    jButton5.setText("Nazad");
+                    //jButton1.setText("Uloguj se");
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel1.setText("Company name");
+                    jLabel2.setText("Language :");
+                    
+                    jButton1.setText("Insert work experience");
+                    jButton2.setText("Update work experience");
+                    jButton3.setText("Delete work experience");
+                    jButton4.setText("Search work experience");
+                    jButton5.setText("Back");
+                    //jButton1.setText("Uloguj se");
+                    jezik=1;
+                }
+            }
+        });
     }
 
     /**
@@ -87,10 +131,6 @@ public class IskustvoForma extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,13 +184,9 @@ public class IskustvoForma extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Izaberite rukovodioca");
+        jLabel2.setText("Jezik :");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel3.setText("Opis iskustva");
-
-        jLabel4.setText("Radni staz");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,17 +198,12 @@ public class IskustvoForma extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField3))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -192,25 +223,17 @@ public class IskustvoForma extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4)
@@ -218,7 +241,7 @@ public class IskustvoForma extends javax.swing.JFrame {
                         .addComponent(jButton5)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37))))
         );
@@ -231,10 +254,15 @@ public class IskustvoForma extends javax.swing.JFrame {
         RadnoIskustvo ri=new RadnoIskustvo(-1, iskustvo);
         boolean uspeh=ubaciRadnoIskustvo(ri);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem je zapamtio radno iskustvo");
+            else JOptionPane.showMessageDialog(this, "System could not save working experience");
+
         }
         else{
-           JOptionPane.showMessageDialog(this, "Sistem nije zapamtio radno iskustvo","Greska",JOptionPane.ERROR_MESSAGE);
+           if(jezik==0)
+            JOptionPane.showMessageDialog(this, "Sistem nije zapamtio radno iskustvo","Greska",JOptionPane.ERROR_MESSAGE);
+           else JOptionPane.showMessageDialog(this, "System could not save working experience","Error",JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -246,32 +274,50 @@ public class IskustvoForma extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati rukovodioca", "Greska", JOptionPane.WARNING_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "You have to choose manager", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         RadnoIskustvo ri=pom.get(izabrani);
         boolean uspeh=obrisiRadnoIskustvo(ri);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Radno iskustvo je uspesno obrisano","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Experience has been deleted successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio brisanje","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "System could not delete working experience","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati rukovodioca", "Greska", JOptionPane.WARNING_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Tou have to choose manager", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         RadnoIskustvo ri=pom.get(izabrani);
         boolean uspeh=promeniRadnoIskustvo(ri);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Radno iskustvo je uspesno promenjeno","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Working experience has been updated successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio promenu","Greska",JOptionPane.ERROR_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "System could not update experience","Error",JOptionPane.ERROR_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -327,13 +373,9 @@ public class IskustvoForma extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 
     private boolean ubaciRadnoIskustvo(RadnoIskustvo ri) {
@@ -379,11 +421,14 @@ public class IskustvoForma extends javax.swing.JFrame {
             }
         }
         if(pom.isEmpty()){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije pronasao vrednosti po zadatom kriterijumu");
+            else JOptionPane.showMessageDialog(this, "System could not find values according to given criteria");
+
             return;
         }
         this.pom=pom;
-        ModelTabeleIskustvo mtr=new ModelTabeleIskustvo(pom);
+        ModelTabeleIskustvo mtr=new ModelTabeleIskustvo(pom,jezik);
         jTable1.setModel(mtr);
     }
 }

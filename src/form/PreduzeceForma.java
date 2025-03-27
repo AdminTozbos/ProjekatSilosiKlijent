@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -28,7 +30,15 @@ import niti.PreduzeceNit;
 public class PreduzeceForma extends javax.swing.JFrame {
     private List<PoljoprivrednoPreduzece>preduzeca;
     private List<PoljoprivrednoPreduzece>pom;
+    int jezik=0;
 
+    public int getJezik() {
+        return jezik;
+    }
+
+    public void setJezik(int jezik) {
+        this.jezik = jezik;
+    }
     public List<PoljoprivrednoPreduzece> getPreduzeca() {
         return preduzeca;
     }
@@ -70,6 +80,44 @@ public class PreduzeceForma extends javax.swing.JFrame {
         });
         } catch (Exception e) {
         }
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("SRB");
+        jComboBox1.addItem("ENG");
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox1.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    jLabel3.setText("Zastupnik");
+                    jLabel1.setText("Naziv");
+                    jLabel2.setText("Mesto");
+                    jLabel4.setText("PIB");
+                    jLabel5.setText("Email");
+                    jLabel6.setText("Jezik :");
+                    jButton1.setText("Unesi preduzece");
+                    jButton2.setText("Izmeni preduzece");
+                    jButton3.setText("Obrisi preduzece");
+                    jButton4.setText("Pretrazi preduzece");
+                    jButton5.setText("Nazad");
+                    //jButton1.setText("Uloguj se");
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel3.setText("Agent");
+                    jLabel1.setText("Name");
+                    jLabel2.setText("Hometown");
+                    jLabel4.setText("PIB");
+                    jLabel5.setText("Email");
+                    jLabel6.setText("Language :");
+                    jButton1.setText("Insert company");
+                    jButton2.setText("Update company");
+                    jButton3.setText("Delete company");
+                    jButton4.setText("Search company");
+                    jButton5.setText("Back");
+                    jezik=1;
+                }
+            }
+        });
     }
 
     /**
@@ -98,6 +146,8 @@ public class PreduzeceForma extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -159,6 +209,10 @@ public class PreduzeceForma extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Jezik :");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,8 +235,8 @@ public class PreduzeceForma extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,23 +245,34 @@ public class PreduzeceForma extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton4)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -230,20 +295,14 @@ public class PreduzeceForma extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addGap(19, 19, 19))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -268,33 +327,52 @@ public class PreduzeceForma extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati rukovodioca", "Greska", JOptionPane.WARNING_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "You have to choose manager", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         PoljoprivrednoPreduzece pp=pom.get(izabrani);
         boolean uspeh=obrisiPoljoprivrednoPreduzece(pp);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Preduzece je uspesno obrisano","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else           JOptionPane.showMessageDialog(this, "Company has been deleted successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio brisanje","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "System could not execute delete operation","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if (jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati preduzece", "Greska", JOptionPane.WARNING_MESSAGE);
+            else             JOptionPane.showMessageDialog(this, "You have to choose a company", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         PoljoprivrednoPreduzece pp=pom.get(izabrani);
         
         boolean uspeh=promeniPoljoprivrednoPreduzece(pp);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Preduzece je uspesno promenjeno","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else             JOptionPane.showMessageDialog(this, "Company has been updated succesfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
+        
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio promenu","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "System could not execute update","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -326,11 +404,13 @@ public class PreduzeceForma extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
@@ -348,15 +428,24 @@ public class PreduzeceForma extends javax.swing.JFrame {
             ServerskiOdgovor so=Komunikacija.getInstance().primiOdgovor();
             boolean uspeh=(boolean) so.getOdgovor();
             if(uspeh){
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem je zapamtio preduzece");
+                else                JOptionPane.showMessageDialog(this, "System has saved the company");
+
             }
             else{
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem nije zapamtio preduzece","Greska",JOptionPane.ERROR_MESSAGE);
+                else                JOptionPane.showMessageDialog(this, "System could not save the company","Error",JOptionPane.ERROR_MESSAGE);
+
             }
             return;
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Uneli ste nedozvoljenu vrednost polja","Greska",JOptionPane.ERROR_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "You entered disallowed field value","Error",JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -412,11 +501,14 @@ public class PreduzeceForma extends javax.swing.JFrame {
             }
         }
         if(pom.isEmpty()){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije pronasao vrednosti po zadatom kriterijumu");
+            else            JOptionPane.showMessageDialog(this, "System could not find values according to given criteria");
+
             return;
         }
         this.pom=pom;
-        ModelTabelePreduzeca mtr=new ModelTabelePreduzeca(pom);
+        ModelTabelePreduzeca mtr=new ModelTabelePreduzeca(pom,jezik);
         jTable1.setModel(mtr);
     }
 }

@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
     List<PoljoprivrednaKultura>kulture;
     List<String>nazivi;
     Potvrda izabrana;
+    int jezik=0;
     /**
      * Creates new form UnosPromene
      */
@@ -52,7 +55,7 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         kn.start();
         stavke=new ArrayList<>();
         nazivi=new ArrayList<>();
-        ModelTabeleStavka mts=new ModelTabeleStavka(stavke,nazivi);
+        ModelTabeleStavka mts=new ModelTabeleStavka(stavke,nazivi,jezik);
         jTable1.setModel(mts);
         
         
@@ -70,7 +73,53 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         nazivi=new ArrayList<>();
         izabrana=potvrda;
         popuniPotvrdu(izabrana);
-        
+        jComboBox4.removeAllItems();
+        jComboBox4.addItem("SRB");
+        jComboBox4.addItem("ENG");
+        jComboBox4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox4.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    jLabel2.setText("Rukovodilac kooperacije");
+                    jLabel3.setText("Unos stavke");
+                    jLabel4.setText("Kultura");
+                    jLabel5.setText("Kolicina");
+                    jLabel7.setText("Cena po kg");
+                    jLabel8.setText("Iznos po stavci");
+                    jLabel9.setText("Unete stavke");
+                    jLabel1.setText("Datum vazenja");
+                    jLabel10.setText("Kooperant");
+                    jLabel11.setText("Jezik :");
+
+                    jButton1.setText("Unesi stavku");
+                    jButton2.setText("Obrisi stavku");
+                    jButton3.setText("Nazad");
+                    jButton4.setText("Sacuvaj potvrdu");
+                    
+                    
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel2.setText("Cooperation manager");
+                    jLabel3.setText("Item input");
+                    jLabel4.setText("Coop");
+                    jLabel5.setText("Quantity");
+                    jLabel7.setText("Price per kg");
+                    jLabel8.setText("Cost per item");
+                    jLabel9.setText("Items");
+                    jLabel1.setText("Date of validity");
+                    jLabel10.setText("Cooperant");
+                    jLabel11.setText("Language :");
+
+                    jButton1.setText("Insert item");
+                    jButton2.setText("Delete item");
+                    jButton3.setText("Back");
+                    jButton4.setText("Save recript");
+                    jezik=1;
+                }
+            }
+        });
         
     }
 
@@ -107,6 +156,8 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -239,6 +290,10 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("Jezik :");
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -260,15 +315,19 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
                                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jComboBox1, 0, 183, Short.MAX_VALUE)
-                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextField1)
+                                        .addComponent(jComboBox1, 0, 183, Short.MAX_VALUE)
+                                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(255, 255, 255)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -276,12 +335,16 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton3)
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -319,7 +382,10 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         StavkaPotvrde stavka=new StavkaPotvrde();
         if(PoljeIznos.getText().equals("Greska")){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate uneti ispravnu kolicinu","Greska",JOptionPane.WARNING_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "You have to enter valid amount","Error",JOptionPane.WARNING_MESSAGE);
+
             return;
         }
        
@@ -339,25 +405,31 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         }
         for (StavkaPotvrde stavkaPotvrde : stavke) {
             if(stavkaPotvrde.getIdKultura()==stavka.getIdKultura()){
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Stavka za datu kulturu vec postoji");
+                else JOptionPane.showMessageDialog(this, "This item already exists on the list");
+
                 return;
             }
         }
         stavke.add(stavka);
         nazivi.add((String) jComboBox2.getSelectedItem());
-        ModelTabeleStavka mts=new ModelTabeleStavka(stavke,nazivi);
+        ModelTabeleStavka mts=new ModelTabeleStavka(stavke,nazivi,jezik);
         jTable1.setModel(mts);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati stavku", "Greska", JOptionPane.WARNING_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "You have to choose item", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         stavke.remove(izabrani);
         nazivi.remove(izabrani);
-        ModelTabeleStavka mts=new ModelTabeleStavka(stavke,nazivi);
+        ModelTabeleStavka mts=new ModelTabeleStavka(stavke,nazivi,jezik);
         jTable1.setModel(mts);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -367,7 +439,10 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         try {
             p.setDatumVazenja(new SimpleDateFormat("dd.MM.yyyy").parse(jTextField1.getText()));
         } catch (ParseException ex) {
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Datum nije u ispravnom formatu", "Greska", JOptionPane.ERROR_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Date format is incorrect", "Error", JOptionPane.ERROR_MESSAGE);
+
             return;
         }
         Double iznos=0.0;
@@ -475,8 +550,10 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -537,10 +614,16 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         ServerskiOdgovor so2=Komunikacija.getInstance().primiOdgovor();
         boolean uspeh= (boolean) so2.getOdgovor();
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem je zapamtio potvrdu");
+            else JOptionPane.showMessageDialog(this, "System has saved your receipt");
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspeo da zapamti potvrdu","Greska",JOptionPane.ERROR_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "System could not save the receipt","Error",JOptionPane.ERROR_MESSAGE);
+
             return;
         }
         
@@ -552,7 +635,10 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
             boolean uspeh1= (boolean) so3.getOdgovor();
             if(!uspeh1){
             
+           if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspeo da zapamti potvrdu","Greska",JOptionPane.ERROR_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "System could not save the receipt","Error",JOptionPane.ERROR_MESSAGE);
+
             return;
             }
         }
@@ -565,10 +651,16 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         ServerskiOdgovor so2=Komunikacija.getInstance().primiOdgovor();
         boolean uspeh= (boolean) so2.getOdgovor();
         if(uspeh){
+            if (jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem je zapamtio potvrdu");
+            else JOptionPane.showMessageDialog(this, "System has saved the receipt");
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspeo da zapamti potvrdu","Greska",JOptionPane.ERROR_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "System could not save the receipt","Error",JOptionPane.ERROR_MESSAGE);
+
             return;
         }
       for (StavkaPotvrde stavkaPotvrde : stavke) {
@@ -578,7 +670,10 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
             boolean uspeh1= (boolean) so3.getOdgovor();
             if(!uspeh1){
             
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspeo da zapamti potvrdu","Greska",JOptionPane.ERROR_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "System could not save the receipt","Error",JOptionPane.ERROR_MESSAGE);
+
             return;
             }
         }
@@ -598,7 +693,7 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
                 }
             }
         }
-        ModelTabeleStavka mts=new ModelTabeleStavka(stavke, nazivi);
+        ModelTabeleStavka mts=new ModelTabeleStavka(stavke, nazivi,jezik);
         jTable1.setModel(mts);
         RukovodilacKooperacije ruk=vratiRukovodioca(izabrana);
         String test=ruk.getIme()+" "+ruk.getPrezime();

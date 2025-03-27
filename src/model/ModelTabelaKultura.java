@@ -14,7 +14,8 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTabelaKultura extends AbstractTableModel{
     private List<PoljoprivrednaKultura>kulture;
     String []kolone={"naziv","cena","mesec zetve"};
-
+    String []kolone2={"name","price","harvest month"};
+    int jezik;
     public List<PoljoprivrednaKultura> getRukovodioci() {
         return kulture;
     }
@@ -22,8 +23,9 @@ public class ModelTabelaKultura extends AbstractTableModel{
     public void setKulture(List<PoljoprivrednaKultura> kulture) {
         this.kulture = kulture;
     }
-    public ModelTabelaKultura(List<PoljoprivrednaKultura>kulture){
+    public ModelTabelaKultura(List<PoljoprivrednaKultura>kulture,int jezik){
         this.kulture=kulture;
+        this.jezik=jezik;
     }
     @Override
     public int getRowCount() {
@@ -54,7 +56,8 @@ public class ModelTabelaKultura extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
-        return kolone[column];
+        if(jezik==0)return kolone[column];
+        else return kolone2[column];
     }
  
 }

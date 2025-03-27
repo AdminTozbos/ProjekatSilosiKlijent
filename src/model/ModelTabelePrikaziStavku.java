@@ -16,6 +16,8 @@ public class ModelTabelePrikaziStavku extends AbstractTableModel{
     List<StavkaPotvrde>stavke;
     List<String>nazivi;
     String []kolone={"rb","ime kulture","cena","kolicina","iznos"};
+     String []kolone2={"pos","crop name","price","quantity","total"};
+     int jezik;
     String kultura;
     public List<StavkaPotvrde> getStavke() {
         return stavke;
@@ -25,9 +27,10 @@ public class ModelTabelePrikaziStavku extends AbstractTableModel{
         this.stavke = stavke;
     }
 
-    public ModelTabelePrikaziStavku(List<StavkaPotvrde> stavke,List<String> nazivi) {
+    public ModelTabelePrikaziStavku(List<StavkaPotvrde> stavke,List<String> nazivi,int jezik) {
         this.stavke = stavke;
         this.nazivi=nazivi;
+        this.jezik=jezik;
         
     }
     
@@ -59,7 +62,8 @@ public class ModelTabelePrikaziStavku extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
-        return kolone[column];
+        if(jezik==0)return kolone[column];
+        else return kolone2[column];
     }
     
 }

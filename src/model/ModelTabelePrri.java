@@ -18,7 +18,9 @@ public class ModelTabelePrri extends AbstractTableModel{
     private List<RadnoIskustvo>iskustva;
     private PRRIForm pf;
     String []kolone={"ime","prezime","firma","staz","opis"};
+    String []kolone2={"name","surname","company","years","description"};
 
+    int jezik;
     public List<PrRi> getPrri() {
         return prri;
     }
@@ -26,9 +28,10 @@ public class ModelTabelePrri extends AbstractTableModel{
     public void setPrri(List<PrRi> prri) {
         this.prri = prri;
     }
-    public ModelTabelePrri(List<PrRi>prri,PRRIForm pf){
+    public ModelTabelePrri(List<PrRi>prri,PRRIForm pf,int jezik){
         this.prri=prri;
         this.pf=pf;
+        this.jezik=jezik;
         rukovodioci=pf.getRukovodioci();
         iskustva=pf.getIskustva();
     }
@@ -67,7 +70,8 @@ public class ModelTabelePrri extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
-        return kolone[column];
+        if(jezik==0)return kolone[column];
+        else return kolone2[column];
     }
 
     private String izvuciIme(PrRi ruk) {

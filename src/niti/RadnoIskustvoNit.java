@@ -48,7 +48,7 @@ public class RadnoIskustvoNit extends Thread{
             try {
                 vratiListuSviRadnoIskustvo(iskustva);
                 is.setIskustva(iskustva);
-                ModelTabeleIskustvo mtr=new ModelTabeleIskustvo(iskustva);
+                ModelTabeleIskustvo mtr=new ModelTabeleIskustvo(iskustva,is.getJezik());
                 tabela.setModel(mtr);
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {

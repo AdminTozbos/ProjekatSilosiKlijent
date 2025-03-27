@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -30,7 +32,7 @@ public class PRRIForm extends javax.swing.JFrame {
     List<PrRi>prri;
     List<PrRi>pom;
     List<RadnoIskustvo>iskustva;
-
+    int jezik=0;
     public List<RukovodilacKooperacije> getRukovodioci() {
         return rukovodioci;
     }
@@ -46,6 +48,14 @@ public class PRRIForm extends javax.swing.JFrame {
     public void setPrri(List<PrRi> prri) {
         this.prri = prri;
         this.pom=prri;
+    }
+
+    public int getJezik() {
+        return jezik;
+    }
+
+    public void setJezik(int jezik) {
+        this.jezik = jezik;
     }
 
     public List<RadnoIskustvo> getIskustva() {
@@ -97,6 +107,42 @@ public class PRRIForm extends javax.swing.JFrame {
         });
         } catch (Exception e) {
         }
+        jComboBox3.removeAllItems();
+        jComboBox3.addItem("SRB");
+        jComboBox3.addItem("ENG");
+        jComboBox3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox3.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    jLabel3.setText("Godine iskustva");
+                    jLabel1.setText("Rukovodilac");
+                    jLabel2.setText("Firma");
+                    jLabel4.setText("Opis iskustva");
+                    jLabel5.setText("Jezik :");
+                    jButton1.setText("Unesi iskustvo");
+                    jButton2.setText("Izmeni iskustvo");
+                    jButton3.setText("Obrisi iskustvo");
+                    jButton4.setText("Pretrazi iskustvo");
+                    jButton5.setText("Nazad");
+                    //jButton1.setText("Uloguj se");
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel3.setText("Experience (Years)");
+                    jLabel1.setText("Manager");
+                    jLabel2.setText("Company");
+                    jLabel4.setText("Description");
+                    jLabel5.setText("Language :");
+                    jButton1.setText("Insert experience");
+                    jButton2.setText("Update experience");
+                    jButton3.setText("Delete experience");
+                    jButton4.setText("Search experience");
+                    jButton5.setText("Back");
+                    jezik=1;
+                }
+            }
+        });
     }
 
     /**
@@ -123,6 +169,8 @@ public class PRRIForm extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -186,13 +234,17 @@ public class PRRIForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Jezik :");
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -201,23 +253,28 @@ public class PRRIForm extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBox1, 0, 188, Short.MAX_VALUE)
-                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton2)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton3)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBox1, 0, 188, Short.MAX_VALUE)
+                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -226,7 +283,9 @@ public class PRRIForm extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -264,7 +323,10 @@ public class PRRIForm extends javax.swing.JFrame {
              staz=Integer.parseInt(jTextField1.getText());
              if(staz<1||staz>40)throw new Exception();
         } catch (Exception e) {
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate uneti ceo broj u intervalu 1-40");
+            else            JOptionPane.showMessageDialog(this, "You have to enter number in interval 1-40");
+
             return;
         }
        String iskustvo=jTextField2.getText();
@@ -291,33 +353,51 @@ public class PRRIForm extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati rukovodioca", "Greska", JOptionPane.WARNING_MESSAGE);
+            else             JOptionPane.showMessageDialog(this, "You have to choose manager", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         PrRi rk=pom.get(izabrani);
         boolean uspeh=obrisiPrri(rk);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Iskustvo je uspesno obrisano","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else             JOptionPane.showMessageDialog(this, "Experience has been deleted successfully","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio brisanje","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else             JOptionPane.showMessageDialog(this, "System could not delete record","Error",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
          int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate izabrati iskustvo", "Greska", JOptionPane.WARNING_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "You have to choose experience", "Error", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
         PrRi rk=pom.get(izabrani);
         
         boolean uspeh=promeniPrri(rk);
         if(uspeh){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Iskustvo je uspesno promenjeno","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "Experience has been updated successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio promenu","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+            else            JOptionPane.showMessageDialog(this, "System could not execute update","Error",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -380,10 +460,12 @@ public class PRRIForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
@@ -420,15 +502,24 @@ public class PRRIForm extends javax.swing.JFrame {
             ServerskiOdgovor so=Komunikacija.getInstance().primiOdgovor();
             boolean uspeh=(boolean) so.getOdgovor();
             if(uspeh){
+               if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem je zapamtio iskustvo");
+               else                JOptionPane.showMessageDialog(this, "System has been saved successfully");
+
             }
             else{
+                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem nije zapamtio iskustvo","Greska",JOptionPane.ERROR_MESSAGE);
+                else                 JOptionPane.showMessageDialog(this, "System could not save experience","Error",JOptionPane.ERROR_MESSAGE);
+
             }
             return;
         }
         else{
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Uneli ste nedozvoljenu vrednost polja","Greska",JOptionPane.ERROR_MESSAGE);
+            else             JOptionPane.showMessageDialog(this, "You have entered disallowed value","Error",JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -466,11 +557,17 @@ public class PRRIForm extends javax.swing.JFrame {
             }
             rk.setIskustvo(jTextField2.getText());
         } catch (Exception e) {
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Morate uneti ceo broj u intervalu 1-40");
+            else            JOptionPane.showMessageDialog(this, "You have to enter number in interval 1-40");
+
             return false;
         }
         if(test.getIdRukovodilac()!=rk.getIdRukovodilac()||test.getIdRadnoIskustvo()!=rk.getIdRadnoIskustvo()){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Nije dozvoljena promena rukovodioca i firme\nUkoliko zelite da promenite te podatke obrisite unos i napravite novi");
+            else             JOptionPane.showMessageDialog(this, "Updating manager or company is not allowed\nIf you want to change them , delete this record , and save new");
+
             return false;
         }
         boolean provera=proveriPrri(rk);
@@ -535,10 +632,13 @@ public class PRRIForm extends javax.swing.JFrame {
         }
         pom=pom2;
         if(pom.isEmpty()){
+            if(jezik==0)
             JOptionPane.showMessageDialog(this, "Sistem nije pronasao vrednosti po zadatom kriterijumu");
+            else            JOptionPane.showMessageDialog(this, "System could not find values according to given criteria");
+
             return;
         }
-        ModelTabelePrri mtr=new ModelTabelePrri(pom,this);
+        ModelTabelePrri mtr=new ModelTabelePrri(pom,this,jezik);
         jTable1.setModel(mtr);
     }
 }

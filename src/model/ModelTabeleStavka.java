@@ -15,7 +15,9 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTabeleStavka extends AbstractTableModel{
     List<StavkaPotvrde>stavke;
     List<String>nazivi;
+    int jezik=0;
     String []kolone={"ime kulture","cena","kolicina","iznos"};
+    String []kolone2={"crop name","price","quantity","total"};
     String kultura;
     public List<StavkaPotvrde> getStavke() {
         return stavke;
@@ -25,11 +27,11 @@ public class ModelTabeleStavka extends AbstractTableModel{
         this.stavke = stavke;
     }
 
-    public ModelTabeleStavka(List<StavkaPotvrde> stavke,List<String> nazivi) {
+    public ModelTabeleStavka(List<StavkaPotvrde> stavke,List<String> nazivi,int jezik) {
         this.stavke = stavke;
         this.kultura=kultura;
         this.nazivi=nazivi;
-        
+        this.jezik=jezik;
     }
     
     @Override
@@ -59,7 +61,8 @@ public class ModelTabeleStavka extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
-        return kolone[column];
+        if(jezik==0)return kolone[column];
+        else return kolone2[column];
     }
     
 }

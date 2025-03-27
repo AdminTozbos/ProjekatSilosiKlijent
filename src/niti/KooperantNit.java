@@ -47,7 +47,7 @@ public class KooperantNit extends Thread{
             try {
                 vratiListuSviKooperant(kooperanti);
                 rf.setKooperanti(kooperanti);
-                ModelTabeleKooperant mtr=new ModelTabeleKooperant(kooperanti);
+                ModelTabeleKooperant mtr=new ModelTabeleKooperant(kooperanti,rf.getJezik());
                 tabela.setModel(mtr);
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {

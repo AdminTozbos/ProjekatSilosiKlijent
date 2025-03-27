@@ -47,7 +47,7 @@ public class PRRINit extends Thread{
                 vratiListuSviPrri(prri);
                 rf.setPrri(prri);
                 
-                ModelTabelePrri mtr=new ModelTabelePrri(prri,rf);
+                ModelTabelePrri mtr=new ModelTabelePrri(prri,rf,rf.getJezik());
                 tabela.setModel(mtr);
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {

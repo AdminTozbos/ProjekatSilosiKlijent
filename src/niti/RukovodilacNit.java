@@ -41,7 +41,7 @@ public class RukovodilacNit extends Thread{
             try {
                 vratiListuSviRukovodilacKooperacije(rukovodioci);
                 rf.setRukovodioci(rukovodioci);
-                ModelTabeleRukovodilac mtr=new ModelTabeleRukovodilac(rukovodioci);
+                ModelTabeleRukovodilac mtr=new ModelTabeleRukovodilac(rukovodioci,rf.getJezik());
                 tabela.setModel(mtr);
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {
