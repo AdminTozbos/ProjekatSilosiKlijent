@@ -149,7 +149,7 @@ public class PreduzeceForma extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setText("Naziv");
 
@@ -319,7 +319,15 @@ public class PreduzeceForma extends javax.swing.JFrame {
         String pib=jTextField4.getText();
         String email=jTextField5.getText();
 
-
+        if(!email.matches("[^.]+@[^.]+.com")){
+            if(jezik==0)
+            JOptionPane.showMessageDialog(this, "Email nije u ispravnom formatu");
+            else{
+                JOptionPane.showMessageDialog(this, "Email format is incorrect");
+   
+            }
+            return;
+        }
         PoljoprivrednoPreduzece pp=new PoljoprivrednoPreduzece(zastupnik, pib, email, PROPERTIES, naziv, mesto);
         kreirajPoljoprivrednoPreduzece(pp);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -359,7 +367,16 @@ public class PreduzeceForma extends javax.swing.JFrame {
             return;
         }
         PoljoprivrednoPreduzece pp=pom.get(izabrani);
-        
+        String email=jTextField5.getText();
+        if(!email.matches("[^.]+@[^.]+.com")){
+            if(jezik==0)
+            JOptionPane.showMessageDialog(this, "Email nije u ispravnom formatu");
+            else{
+                JOptionPane.showMessageDialog(this, "Email format is incorrect");
+   
+            }
+            return;
+        }
         boolean uspeh=promeniPoljoprivrednoPreduzece(pp);
         if(uspeh){
             if(jezik==0)

@@ -6,7 +6,14 @@ package form;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
+import komunikacija.Komunikacija;
+import model.KlijentskiZahtev;
+import model.Operacije;
 import model.PoljoprivrednoGazdinstvo;
+import model.ServerskiOdgovor;
 
 
 
@@ -16,11 +23,13 @@ import model.PoljoprivrednoGazdinstvo;
  */
 public class KlijentskaForma extends javax.swing.JFrame {
     int jezik=0;
+    String username;
     /**
      * Creates new form ServerskaForma
      */
-    public KlijentskaForma() {
+    public KlijentskaForma(String username) {
         initComponents();
+        this.username=username;
         jComboBox1.removeAllItems();
         jComboBox1.addItem("SRB");
         jComboBox1.addItem("ENG");
@@ -35,16 +44,18 @@ public class KlijentskaForma extends javax.swing.JFrame {
                     jMenu2.setText("Pruzalac usluge");
                     jMenu3.setText("Primalac usluge");
                     jMenu4.setText("Sifarnici");
-                    jMenu5.setText("Podesavanja");
+                    
                     jMenu6.setText("O programu");
                     jMenuItem1.setText("Potvrda");
                     jMenuItem2.setText("Rukovodilac kooperacije");
                     jMenuItem8.setText("Iskustvo rukovodioca");
                     jMenuItem3.setText("Kooperant");
+                    jButton2.setText("Odjavi se");
                     jMenuItem4.setText("Poljoprivredno gazdinstvo");
                     jMenuItem5.setText("Poljoprivredno preduzece");
                     jMenuItem6.setText("Poljoprivredna kultura");
                     jMenuItem7.setText("Radno iskustvo");
+                    jMenuItem9.setText("O programu");
                     jezik=0;
                 } else if ("ENG".equals(selectedItem)) {
                     jLabel1.setText("Language :");
@@ -52,8 +63,9 @@ public class KlijentskaForma extends javax.swing.JFrame {
                     jMenu2.setText("Service provider");
                     jMenu3.setText("Customer");
                     jMenu4.setText("Provider");
-                    jMenu5.setText("Settings");
+                    
                     jMenu6.setText("About");
+                    jButton2.setText("Logout");
                     jMenuItem1.setText("Receipt");
                     jMenuItem2.setText("Cooperation manager");
                     jMenuItem8.setText("Manager experience");
@@ -62,11 +74,19 @@ public class KlijentskaForma extends javax.swing.JFrame {
                     jMenuItem5.setText("Agricultural company");
                     jMenuItem6.setText("Agricultural crop");
                     jMenuItem7.setText("Work experience");
+                    jMenuItem9.setText("About");
                     jezik=1;
                 }
             }
         });
-       
+       addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                handleWindowClosing();
+            }
+
+            
+        });
     }
 
     /**
@@ -80,6 +100,7 @@ public class KlijentskaForma extends javax.swing.JFrame {
 
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -93,14 +114,21 @@ public class KlijentskaForma extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setText("Jezik");
+
+        jButton2.setText("Odjavi se");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Dokumenti");
 
@@ -182,10 +210,16 @@ public class KlijentskaForma extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Podesavanja");
-        jMenuBar1.add(jMenu5);
-
         jMenu6.setText("O programu");
+
+        jMenuItem9.setText("O programu");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem9);
+
         jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
@@ -194,12 +228,17 @@ public class KlijentskaForma extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(484, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,12 +247,17 @@ public class KlijentskaForma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void handleWindowClosing() {
+        KlijentskiZahtev kz=new KlijentskiZahtev(Operacije.LOGOUT, username);
+        Komunikacija.getInstance().posaljiZahtev(kz);
+    }
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         RukovodilacForma rf=new RukovodilacForma();
         rf.setVisible(true);
@@ -254,50 +298,42 @@ public class KlijentskaForma extends javax.swing.JFrame {
         pf.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        KlijentskiZahtev kz=new KlijentskiZahtev(Operacije.LOGOUT, username);
+        Komunikacija.getInstance().posaljiZahtev(kz);
+        
+        ServerskiOdgovor so=komunikacija.Komunikacija.getInstance().primiOdgovor();
+        
+            if(so==null){
+            System.exit(0);
+            }
+        boolean odgovor=(boolean) so.getOdgovor();
+        if(odgovor){
+            JOptionPane.showMessageDialog(this, "Dovidjenja");
+            System.exit(0);
+        }
+        JOptionPane.showMessageDialog(this, "Greska");
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        OProgramuForm op=new OProgramuForm();
+        op.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KlijentskaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KlijentskaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KlijentskaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KlijentskaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new KlijentskaForma().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -308,5 +344,6 @@ public class KlijentskaForma extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

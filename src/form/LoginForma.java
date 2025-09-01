@@ -6,6 +6,8 @@ package form;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -51,6 +53,18 @@ public class LoginForma extends javax.swing.JFrame {
                 }
             }
         });
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                handleWindowClosing();
+            }
+
+            
+        });
+    }
+    private void handleWindowClosing() {
+        KlijentskiZahtev kz=new KlijentskiZahtev(Operacije.LOGOUT, null);
+        Komunikacija.getInstance().posaljiZahtev(kz);
     }
     public RukovodilacKooperacije prijaviRukovodilacKooperacije(String korisnickoIme,String sifra){
         List<String>parametri=new ArrayList<>();
@@ -172,7 +186,7 @@ public class LoginForma extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Uspesno ste se prijavili");
            else JOptionPane.showMessageDialog(this, "Login has been successful");
 
-           KlijentskaForma kf=new KlijentskaForma();
+           KlijentskaForma kf=new KlijentskaForma(username);
            kf.setVisible(true);
            
            this.dispose();

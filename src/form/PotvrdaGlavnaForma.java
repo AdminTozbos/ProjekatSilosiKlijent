@@ -151,7 +151,7 @@ public class PotvrdaGlavnaForma extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jButton1.setText("Unesi potvrdu");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

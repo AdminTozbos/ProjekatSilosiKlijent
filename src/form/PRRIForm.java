@@ -122,8 +122,8 @@ public class PRRIForm extends javax.swing.JFrame {
                     jLabel4.setText("Opis iskustva");
                     jLabel5.setText("Jezik :");
                     jButton1.setText("Unesi iskustvo");
-                    jButton2.setText("Izmeni iskustvo");
-                    jButton3.setText("Obrisi iskustvo");
+                    jButton2.setText("Obrisi iskustvo");
+                    jButton3.setText("Izmeni iskustvo");
                     jButton4.setText("Pretrazi iskustvo");
                     jButton5.setText("Nazad");
                     //jButton1.setText("Uloguj se");
@@ -135,8 +135,8 @@ public class PRRIForm extends javax.swing.JFrame {
                     jLabel4.setText("Description");
                     jLabel5.setText("Language :");
                     jButton1.setText("Insert experience");
-                    jButton2.setText("Update experience");
-                    jButton3.setText("Delete experience");
+                    jButton2.setText("Delete experience");
+                    jButton3.setText("Update experience");
                     jButton4.setText("Search experience");
                     jButton5.setText("Back");
                     jezik=1;
@@ -172,7 +172,7 @@ public class PRRIForm extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setText("Rukovodilac");
 
@@ -500,11 +500,23 @@ public class PRRIForm extends javax.swing.JFrame {
             KlijentskiZahtev kz=new KlijentskiZahtev(Operacije.DODAJPRRI, unet);
             komunikacija.Komunikacija.getInstance().posaljiZahtev(kz);
             ServerskiOdgovor so=Komunikacija.getInstance().primiOdgovor();
+            if(so.getOdgovor()==null){
+            if(jezik==0)
+            JOptionPane.showMessageDialog(this, "Jedan radnik u jednoj firmi moze imati samo jedno radno iskustvo\n"
+                    + "Ukoliko je radnik radio u vise navrata u istoj firmi , godine unesite zbirno\n kao i opis radnih zaduzenja koja je obavljao");
+            else JOptionPane.showMessageDialog(this, "For every employee you can enter data for certain company only once\n"
+                    + "If employee worked multiple times at the same company you should enter total years number\n and complete work experience in respective fields");
+            if(jezik==0)
+                JOptionPane.showMessageDialog(this, "Sistem nije zapamtio iskustvo","Greska",JOptionPane.ERROR_MESSAGE);
+                else                 JOptionPane.showMessageDialog(this, "System could not save experience","Error",JOptionPane.ERROR_MESSAGE);
+
+            return;
+            }
             boolean uspeh=(boolean) so.getOdgovor();
             if(uspeh){
                if(jezik==0)
                 JOptionPane.showMessageDialog(this, "Sistem je zapamtio iskustvo");
-               else                JOptionPane.showMessageDialog(this, "System has been saved successfully");
+               else                JOptionPane.showMessageDialog(this, "System has saved experience successfully");
 
             }
             else{

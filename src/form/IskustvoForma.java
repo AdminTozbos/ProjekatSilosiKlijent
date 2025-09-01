@@ -132,7 +132,7 @@ public class IskustvoForma extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setText("Unesite firmu");
 
@@ -275,8 +275,8 @@ public class IskustvoForma extends javax.swing.JFrame {
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
             if(jezik==0)
-            JOptionPane.showMessageDialog(this, "Morate izabrati rukovodioca", "Greska", JOptionPane.WARNING_MESSAGE);
-            else JOptionPane.showMessageDialog(this, "You have to choose manager", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Morate izabrati iskustvo", "Greska", JOptionPane.WARNING_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "You have to choose experience", "Error", JOptionPane.WARNING_MESSAGE);
 
             return;
         }
@@ -300,8 +300,8 @@ public class IskustvoForma extends javax.swing.JFrame {
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
             if(jezik==0)
-            JOptionPane.showMessageDialog(this, "Morate izabrati rukovodioca", "Greska", JOptionPane.WARNING_MESSAGE);
-            else JOptionPane.showMessageDialog(this, "Tou have to choose manager", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Morate izabrati iskustvo", "Greska", JOptionPane.WARNING_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "You have to choose experience", "Error", JOptionPane.WARNING_MESSAGE);
 
             return;
         }
@@ -382,6 +382,7 @@ public class IskustvoForma extends javax.swing.JFrame {
         KlijentskiZahtev kz=new KlijentskiZahtev(Operacije.DODAJISK, ri);
         komunikacija.Komunikacija.getInstance().posaljiZahtev(kz);
         ServerskiOdgovor so=Komunikacija.getInstance().primiOdgovor();
+        
         boolean uspeh=(boolean) so.getOdgovor();
         return uspeh;
     }

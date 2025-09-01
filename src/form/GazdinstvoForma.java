@@ -144,7 +144,7 @@ public class GazdinstvoForma extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setText("Naziv");
 
@@ -319,17 +319,16 @@ public class GazdinstvoForma extends javax.swing.JFrame {
         }
         PoljoprivrednoGazdinstvo pg=pom.get(izabrani);
         boolean uspeh=obrisiPoljoprivrednoGazdinstvo(pg);
-        if(uspeh&&jezik==0){
-            JOptionPane.showMessageDialog(this, "Gazdinstvo je uspesno obrisano","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+        if(uspeh){
+           if (jezik==0) JOptionPane.showMessageDialog(this, "Gazdinstvo je uspesno obrisano","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+           else JOptionPane.showMessageDialog(this, "Holding is successfully deleted","Confirmation",JOptionPane.INFORMATION_MESSAGE);            
+
+
         }
         else{
-            JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio brisanje","Potvrda",JOptionPane.INFORMATION_MESSAGE);
-        }
-        if(uspeh&&jezik==1){
-            JOptionPane.showMessageDialog(this, "Holding is successfully deleted","Confirmation",JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Holdicn could not be deleted","Error",JOptionPane.INFORMATION_MESSAGE);
+        if(jezik==0)JOptionPane.showMessageDialog(this, "Sistem nije uspesno izvrsio brisanje","Potvrda",JOptionPane.INFORMATION_MESSAGE);
+        else JOptionPane.showMessageDialog(this, "Holdicn could not be deleted","Error",JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

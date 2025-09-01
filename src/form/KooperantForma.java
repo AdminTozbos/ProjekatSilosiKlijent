@@ -152,10 +152,10 @@ public class KooperantForma extends javax.swing.JFrame {
                     jLabel6.setText("PIB");
                     jLabel7.setText("Email");
                     jLabel8.setText("Jezik :");
-                    jButton1.setText("Unesi kooperanta");
-                    jButton3.setText("Izmeni kooperanta");
-                    jButton4.setText("Obrisi kooperanta");
-                    jButton5.setText("Pretrazi kooperanta");
+                    jButton1.setText("Dodaj kooperanta");
+                    jButton3.setText("Pretrazi kooperanta");
+                    jButton4.setText("Izmeni kooperanta");
+                    jButton5.setText("Obrisi kooperanta");
                     jCheckBox1.setText("Preduzece");
                     jCheckBox2.setText("Gazdinstvo");
 
@@ -172,9 +172,9 @@ public class KooperantForma extends javax.swing.JFrame {
                     jLabel7.setText("Email");
                     jLabel8.setText("Language :");
                     jButton1.setText("Insert cooperant");
-                    jButton3.setText("Update cooperant");
-                    jButton4.setText("Delete cooperant");
-                    jButton5.setText("Search cooperant");
+                    jButton3.setText("Search cooperant");
+                    jButton4.setText("Update cooperant");
+                    jButton5.setText("Delete cooperant");
                     jButton6.setText("Back");
                     jCheckBox1.setText("Company");
                     jCheckBox2.setText("Holding");
@@ -219,7 +219,7 @@ public class KooperantForma extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -451,6 +451,7 @@ public class KooperantForma extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
         int izabrani=jTable1.getSelectedRow();
         if(izabrani==-1){
             if(jezik==0)
@@ -459,12 +460,25 @@ public class KooperantForma extends javax.swing.JFrame {
 
             return;
         }
+        if(jCheckBox1.isSelected()){
+        String email=jTextField7.getText();
+        if(!email.matches("[^.]+@[^.]+.com")){
+            if(jezik==0)
+            JOptionPane.showMessageDialog(this, "Email nije u ispravnom formatu");
+            else{
+                JOptionPane.showMessageDialog(this, "Email format is incorrect");
+   
+            }
+            return;
+        }
+        }
+        
         Kooperant rk=pom.get(izabrani);
         boolean uspeh=izmeniKooperant(rk);
         if(uspeh){
             if(jezik==0)
             JOptionPane.showMessageDialog(this, "Kooperant je uspesno izmenjen","Potvrda",JOptionPane.INFORMATION_MESSAGE);
-            else JOptionPane.showMessageDialog(this, "Cooperant has been deleted successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Cooperant has been updated successfully","Confirmation",JOptionPane.INFORMATION_MESSAGE);
 
         }
         else{
@@ -480,7 +494,7 @@ public class KooperantForma extends javax.swing.JFrame {
         String mesto=jTextField2.getText();
         String zastupnik=jTextField3.getText();
         String pib=jTextField4.getText();
-        String email=jTextField5.getText();
+        String email=jTextField7.getText();
         String vlasnik=jTextField6.getText();
         String brtel=jTextField7.getText();
         List<Object>params=new ArrayList<>();
@@ -654,6 +668,18 @@ public class KooperantForma extends javax.swing.JFrame {
     }
 
     private boolean proveriKooperanta(Kooperant kooperant) {
+        if(jCheckBox1.isSelected()){
+        String email=jTextField7.getText();
+        if(!email.matches("[^.]+@[^.]+.com")){
+            if(jezik==0)
+            JOptionPane.showMessageDialog(this, "Email nije u ispravnom formatu");
+            else{
+                JOptionPane.showMessageDialog(this, "Email format is incorrect");
+   
+            }
+            return false;
+        }
+        }
         if(!kooperant.getMesto().matches("[A-Za-z ]+"))return false;
         if(kooperant instanceof PoljoprivrednoPreduzece){
             if(((PoljoprivrednoPreduzece) kooperant).getPib().length()!=13)return false;
@@ -731,7 +757,9 @@ public class KooperantForma extends javax.swing.JFrame {
         else if(jCheckBox1.isSelected()){
             for (Kooperant kooperant : kooperanti) {
                 if(kooperant instanceof PoljoprivrednoPreduzece){
-                    if(kooperant.getNazivKooperanta().contains(naziv)&&kooperant.getMesto().contains(mesto)&&((PoljoprivrednoPreduzece) kooperant).getPravniZastupnik().contains(zastupnik)&&((PoljoprivrednoPreduzece) kooperant).getPib().contains(pib)&&((PoljoprivrednoPreduzece) kooperant).getEmail().contains(email)){
+                    if(kooperant.getNazivKooperanta().contains(naziv)&&kooperant.getMesto().contains(mesto)&&((PoljoprivrednoPreduzece) kooperant).getPib().contains(pib)&&((PoljoprivrednoPreduzece) kooperant).getPravniZastupnik().contains(zastupnik)){
+                        System.out.println(email);
+                        System.out.println(((PoljoprivrednoPreduzece) kooperant).getEmail());
                     pom.add(kooperant);
                     }
                 }

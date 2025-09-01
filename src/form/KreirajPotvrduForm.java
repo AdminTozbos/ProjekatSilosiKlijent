@@ -57,7 +57,53 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         nazivi=new ArrayList<>();
         ModelTabeleStavka mts=new ModelTabeleStavka(stavke,nazivi,jezik);
         jTable1.setModel(mts);
-        
+        jComboBox4.removeAllItems();
+        jComboBox4.addItem("SRB");
+        jComboBox4.addItem("ENG");
+        jComboBox4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) jComboBox4.getSelectedItem();
+
+                    if ("SRB".equals(selectedItem)) {
+                    jLabel2.setText("Rukovodilac kooperacije");
+                    jLabel3.setText("Unos stavke");
+                    jLabel4.setText("Kultura");
+                    jLabel5.setText("Kolicina");
+                    jLabel7.setText("Cena po kg");
+                    jLabel8.setText("Iznos po stavci");
+                    jLabel9.setText("Unete stavke");
+                    jLabel1.setText("Datum vazenja");
+                    jLabel10.setText("Kooperant");
+                    jLabel11.setText("Jezik :");
+
+                    jButton1.setText("Unesi stavku");
+                    jButton2.setText("Obrisi stavku");
+                    jButton3.setText("Nazad");
+                    jButton4.setText("Sacuvaj potvrdu");
+                    
+                    
+                    jezik=0;
+                } else if ("ENG".equals(selectedItem)) {
+                    jLabel2.setText("Cooperation manager");
+                    jLabel3.setText("Item input");
+                    jLabel4.setText("Coop");
+                    jLabel5.setText("Quantity");
+                    jLabel7.setText("Price per kg");
+                    jLabel8.setText("Cost per item");
+                    jLabel9.setText("Items");
+                    jLabel1.setText("Date of validity");
+                    jLabel10.setText("Cooperant");
+                    jLabel11.setText("Language :");
+
+                    jButton1.setText("Insert item");
+                    jButton2.setText("Delete item");
+                    jButton3.setText("Back");
+                    jButton4.setText("Save recript");
+                    jezik=1;
+                }
+            }
+        });
         
     }
     public KreirajPotvrduForm(Potvrda potvrda) {
@@ -159,7 +205,7 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setText("Datum vazenja");
 
@@ -438,10 +484,18 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
         p.setDatumIzdavanja(new Date());
         try {
             p.setDatumVazenja(new SimpleDateFormat("dd.MM.yyyy").parse(jTextField1.getText()));
+            if(p.getDatumVazenja().before(new Date()))throw new IllegalArgumentException();
         } catch (ParseException ex) {
             if(jezik==0)
             JOptionPane.showMessageDialog(this, "Datum nije u ispravnom formatu", "Greska", JOptionPane.ERROR_MESSAGE);
             else JOptionPane.showMessageDialog(this, "Date format is incorrect", "Error", JOptionPane.ERROR_MESSAGE);
+
+            return;
+        }
+        catch (IllegalArgumentException ex2) {
+            if(jezik==0)
+            JOptionPane.showMessageDialog(this, "Datum mora biti u buducnosti", "Greska", JOptionPane.ERROR_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Date has to be in future", "Error", JOptionPane.ERROR_MESSAGE);
 
             return;
         }
@@ -609,7 +663,10 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
     }
 
     private void KreirajPotvrda(Potvrda p) {
-        KlijentskiZahtev kz2=new KlijentskiZahtev(Operacije.DODAJPOT, p);
+        List<Object>lista=new ArrayList<>();
+        lista.add(p);
+        lista.add(stavke);
+        KlijentskiZahtev kz2=new KlijentskiZahtev(Operacije.DODAJPOT, lista);
         Komunikacija.getInstance().posaljiZahtev(kz2);
         ServerskiOdgovor so2=Komunikacija.getInstance().primiOdgovor();
         boolean uspeh= (boolean) so2.getOdgovor();
@@ -627,26 +684,13 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
             return;
         }
         
-        
-        for (StavkaPotvrde stavkaPotvrde : stavke) {
-            KlijentskiZahtev kz3=new KlijentskiZahtev(Operacije.DODAJSTA, stavkaPotvrde);
-            Komunikacija.getInstance().posaljiZahtev(kz3);
-            ServerskiOdgovor so3=Komunikacija.getInstance().primiOdgovor();
-            boolean uspeh1= (boolean) so3.getOdgovor();
-            if(!uspeh1){
-            
-           if(jezik==0)
-            JOptionPane.showMessageDialog(this, "Sistem nije uspeo da zapamti potvrdu","Greska",JOptionPane.ERROR_MESSAGE);
-            else JOptionPane.showMessageDialog(this, "System could not save the receipt","Error",JOptionPane.ERROR_MESSAGE);
-
-            return;
-            }
-        }
-        
     }
 
     private void izmeniPotvrda(Potvrda p) {
-       KlijentskiZahtev kz2=new KlijentskiZahtev(Operacije.IZMENIPOT, p);
+        List<Object>lista=new ArrayList<>();
+        lista.add(p);
+        lista.add(stavke);
+        KlijentskiZahtev kz2=new KlijentskiZahtev(Operacije.IZMENIPOT, lista);
         Komunikacija.getInstance().posaljiZahtev(kz2);
         ServerskiOdgovor so2=Komunikacija.getInstance().primiOdgovor();
         boolean uspeh= (boolean) so2.getOdgovor();
@@ -663,7 +707,7 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
 
             return;
         }
-      for (StavkaPotvrde stavkaPotvrde : stavke) {
+      /*for (StavkaPotvrde stavkaPotvrde : stavke) {
             KlijentskiZahtev kz3=new KlijentskiZahtev(Operacije.DODAJSTA, stavkaPotvrde);
             Komunikacija.getInstance().posaljiZahtev(kz3);
             ServerskiOdgovor so3=Komunikacija.getInstance().primiOdgovor();
@@ -676,7 +720,7 @@ public class KreirajPotvrduForm extends javax.swing.JFrame {
 
             return;
             }
-        }
+        }*/
     }
 
     private void popuniPotvrdu(Potvrda izabrana) {

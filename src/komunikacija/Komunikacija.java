@@ -4,6 +4,7 @@
  */
 package komunikacija;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -39,11 +40,15 @@ public class Komunikacija {
         try {
             ObjectInputStream ois=new ObjectInputStream(s.getInputStream());
             return (ServerskiOdgovor) ois.readObject();
-        } catch (IOException ex) {
+        } catch(EOFException e){
+        
+        }
+        catch (IOException ex) {
             Logger.getLogger(Komunikacija.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Komunikacija.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return null;
     }
     public void posaljiZahtev(KlijentskiZahtev kz){
